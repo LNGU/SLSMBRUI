@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLS MBR Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <h1>SLS MBR Dashboard</h1>
+            <span class="last-refreshed">Last Refreshed<br><span id="lastRefreshed"></span></span>
+        </div>
+        <nav class="nav-tabs">
+            <button class="nav-tab active">Home</button>
+            <button class="nav-tab">Risk Details</button>
+            <button class="nav-tab">CO/CSA...</button>
+            <button class="nav-tab">Renewal...</button>
+            <button class="nav-tab">Financial...</button>
+            <button class="nav-tab">Tickets...</button>
+        </nav>
+        <div class="header-right">
+            <span class="month-label" id="currentMonth"></span>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- KPI Cards Row -->
+        <section class="kpi-row">
+            <div class="kpi-card blue clickable" data-kpi="companySpend">
+                <span class="kpi-label">FY26 Company Spend</span>
+                <span class="kpi-value">134.18M</span>
+            </div>
+            <div class="kpi-card blue clickable" data-kpi="msdSpend">
+                <span class="kpi-label">FY26 MSD Spend</span>
+                <span class="kpi-value">6.64M</span>
+            </div>
+            <div class="kpi-card blue clickable" data-kpi="tiamSpend">
+                <span class="kpi-label">FY26 TI&M Spend</span>
+                <span class="kpi-value">765.51K</span>
+            </div>
+            <div class="kpi-card teal clickable" data-kpi="snowTickets">
+                <span class="kpi-label">SNOW Tickets MTD</span>
+                <span class="kpi-value">706</span>
+            </div>
+            <div class="kpi-card teal clickable" data-kpi="icmTickets">
+                <span class="kpi-label">ICM Tickets MTD</span>
+                <span class="kpi-value">130</span>
+            </div>
+            <div class="kpi-card dark-blue clickable" data-kpi="managedTitles">
+                <span class="kpi-label">SLS Managed Titles</span>
+                <span class="kpi-value">42</span>
+            </div>
+            <div class="kpi-card dark-blue clickable" data-kpi="managedPublishers">
+                <span class="kpi-label">SLS Managed Publishers</span>
+                <span class="kpi-value">19</span>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <section class="content-grid">
+            <!-- Row 1 -->
+            <div class="card savings-card clickable" data-card="savings">
+                <h3>Latest Potential Savings</h3>
+                <div class="chart-container">
+                    <canvas id="savingsChart"></canvas>
+                </div>
+                <div class="chart-legend" id="savingsLegend"></div>
+            </div>
+
+            <div class="card risks-card clickable" data-card="risks">
+                <h3># of Risks we are tracking</h3>
+                <div class="chart-container">
+                    <canvas id="risksChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card renewals-card clickable" data-card="renewals">
+                <h3>Upcoming Renewals</h3>
+                <div class="renewal-grid">
+                    <div class="renewal-item">
+                        <span class="renewal-label">Days Until Next Renewal</span>
+                        <span class="renewal-value orange">14</span>
+                    </div>
+                    <div class="renewal-item">
+                        <span class="renewal-label">CSA Exp. This Q</span>
+                        <span class="renewal-value orange">0</span>
+                    </div>
+                    <div class="renewal-item">
+                        <span class="renewal-label">Publisher</span>
+                        <span class="renewal-value orange">Docker</span>
+                    </div>
+                    <div class="renewal-item">
+                        <span class="renewal-label">CO Exp. This Q</span>
+                        <span class="renewal-value orange">0</span>
+                    </div>
+                    <div class="renewal-item">
+                        <span class="renewal-label">Renewal Due Date</span>
+                        <span class="renewal-value orange">1/31/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="card spend-card clickable" data-card="spend">
+                <h3>Annual Spend by Publisher</h3>
+                <div class="chart-container-tall">
+                    <canvas id="spendChart"></canvas>
+                </div>
+</div>
+
+            <div class="card heatmap-card clickable" data-card="heatmap">
+                <div class="heatmap-header-row">
+                    <h3>Risk Score Heatmap</h3>
+                    <div class="heatmap-toggle">
+                        <button class="toggle-btn active" data-filter="risks">With Risks</button>
+                        <button class="toggle-btn" data-filter="all">All</button>
+                    </div>
+                </div>
+                <div class="heatmap-container" id="heatmapContainer"></div>
+            </div>
+
+            <div class="card compliance-card clickable" data-card="compliance">
+                <h3>License Renewals/Compliance Health</h3>
+                <div class="chart-container">
+                    <canvas id="complianceChart"></canvas>
+                </div>
+                <div class="compliance-legend">
+                    <span class="legend-item"><span class="dot red"></span>Past Due</span>
+                    <span class="legend-item"><span class="dot orange"></span>Renewals Due by EOQ</span>
+                    <span class="legend-item"><span class="dot blue"></span>Renewals Due by EOY</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Details</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="charts.js"></script>
+    <script src="modals.js"></script>
+</body>
+</html>
