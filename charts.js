@@ -337,12 +337,38 @@ function initHeatmapTooltips() {
                 <span class="tooltip-detail">${detail}</span>
             `;
             
+            // Position off-screen first to measure
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.position = 'fixed';
             document.body.appendChild(tooltip);
             
             const rect = this.getBoundingClientRect();
-            tooltip.style.left = rect.left + window.scrollX + 'px';
-            tooltip.style.top = (rect.bottom + window.scrollY + 5) + 'px';
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const viewportWidth = window.innerWidth;
             
+            // Check if tooltip would go below the viewport
+            const spaceBelow = viewportHeight - rect.bottom;
+            const tooltipHeight = tooltipRect.height;
+            const tooltipWidth = tooltipRect.width;
+            
+            // Calculate left position, ensuring it doesn't overflow right edge
+            let leftPos = rect.left;
+            if (leftPos + tooltipWidth > viewportWidth - 10) {
+                leftPos = viewportWidth - tooltipWidth - 10;
+            }
+            
+            tooltip.style.left = leftPos + 'px';
+            
+            if (spaceBelow < tooltipHeight + 10) {
+                // Position above the cell
+                tooltip.style.top = (rect.top - tooltipHeight - 5) + 'px';
+            } else {
+                // Position below the cell
+                tooltip.style.top = (rect.bottom + 5) + 'px';
+            }
+            
+            tooltip.style.visibility = 'visible';
             this._tooltip = tooltip;
         });
         
