@@ -679,3 +679,19 @@ body {
     font-size: 0.8rem;
     color: #666;
 }
+
+/* Risk Badge Styles */
+.risk-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+.risk-badge.sspa { background: #2c3e50; }
+.risk-badge.po { background: #3498db; }
+.risk-badge.finance { background: #1abc9c; }
+.risk-badge.legal { background: #9b59b6; }
+.risk-badge.inventory { background: #e67e22; }

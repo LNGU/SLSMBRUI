@@ -338,19 +338,53 @@ function generateSavingsDetail() {
 function generateRisksDetail() {
     const heatmap = dashboardData.riskHeatmap;
     
-    // Count risks by category
+    // Count risks by category and collect details
     const riskCounts = { sspa: 0, po: 0, finance: 0, legal: 0, inventory: 0 };
-    const riskPublishers = { sspa: [], po: [], finance: [], legal: [], inventory: [] };
+    const riskDetails = [];
     
     heatmap.forEach(pub => {
-        if (pub.sspa > 0) { riskCounts.sspa += pub.sspa; riskPublishers.sspa.push(pub.name); }
-        if (pub.po > 0) { riskCounts.po += pub.po; riskPublishers.po.push(pub.name); }
-        if (pub.finance > 0) { riskCounts.finance += pub.finance; riskPublishers.finance.push(pub.name); }
-        if (pub.legal > 0) { riskCounts.legal += pub.legal; riskPublishers.legal.push(pub.name); }
-        if (pub.inventory > 0) { riskCounts.inventory += pub.inventory; riskPublishers.inventory.push(pub.name); }
+        if (pub.sspa > 0) { 
+            riskCounts.sspa += pub.sspa; 
+            if (pub.details.sspa) {
+                riskDetails.push({ publisher: pub.name, category: 'SSPA', description: pub.details.sspa });
+            }
+        }
+        if (pub.po > 0) { 
+            riskCounts.po += pub.po; 
+            if (pub.details.po) {
+                riskDetails.push({ publisher: pub.name, category: 'PO', description: pub.details.po });
+            }
+        }
+        if (pub.finance > 0) { 
+            riskCounts.finance += pub.finance; 
+            if (pub.details.finance) {
+                riskDetails.push({ publisher: pub.name, category: 'Finance', description: pub.details.finance });
+            }
+        }
+        if (pub.legal > 0) { 
+            riskCounts.legal += pub.legal; 
+            if (pub.details.legal) {
+                riskDetails.push({ publisher: pub.name, category: 'Legal', description: pub.details.legal });
+            }
+        }
+        if (pub.inventory > 0) { 
+            riskCounts.inventory += pub.inventory; 
+            if (pub.details.inventory) {
+                riskDetails.push({ publisher: pub.name, category: 'Inventory', description: pub.details.inventory });
+            }
+        }
     });
     
     const totalRisks = Object.values(riskCounts).reduce((a, b) => a + b, 0);
+    
+    // Generate detailed risk rows
+    const riskRows = riskDetails.map(risk => `
+        <tr>
+            <td>${risk.publisher}</td>
+            <td><span class="risk-badge ${risk.category.toLowerCase()}">${risk.category}</span></td>
+            <td>${risk.description}</td>
+        </tr>
+    `).join('');
     
     return `
         <div class="summary-box">
@@ -372,48 +406,27 @@ function generateRisksDetail() {
                     <span class="label">Finance Risks</span>
                     <span class="value">${riskCounts.finance}</span>
                 </div>
+                <div class="summary-stat">
+                    <span class="label">Legal Risks</span>
+                    <span class="value">${riskCounts.legal}</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="label">Inventory Risks</span>
+                    <span class="value">${riskCounts.inventory}</span>
+                </div>
             </div>
         </div>
-        <h4>Risk Details by Category</h4>
+        <h4>Risk Details</h4>
         <table class="detail-table">
             <thead>
                 <tr>
-                    <th>Risk Category</th>
-                    <th class="number">Count</th>
-                    <th>Affected Publishers</th>
+                    <th>Publisher</th>
+                    <th>Category</th>
+                    <th>Risk Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>SSPA (Supplier Security & Privacy)</td>
-                    <td class="number">${riskCounts.sspa}</td>
-                    <td>${riskPublishers.sspa.join(', ') || 'None'}</td>
-                </tr>
-                <tr>
-                    <td>PO (Purchase Order)</td>
-                    <td class="number">${riskCounts.po}</td>
-                    <td>${riskPublishers.po.join(', ') || 'None'}</td>
-                </tr>
-                <tr>
-                    <td>Finance</td>
-                    <td class="number">${riskCounts.finance}</td>
-                    <td>${riskPublishers.finance.join(', ') || 'None'}</td>
-                </tr>
-                <tr>
-                    <td>Legal</td>
-                    <td class="number">${riskCounts.legal}</td>
-                    <td>${riskPublishers.legal.join(', ') || 'None'}</td>
-                </tr>
-                <tr>
-                    <td>Inventory</td>
-                    <td class="number">${riskCounts.inventory}</td>
-                    <td>${riskPublishers.inventory.join(', ') || 'None'}</td>
-                </tr>
-                <tr class="total-row">
-                    <td><strong>TOTAL</strong></td>
-                    <td class="number"><strong>${totalRisks}</strong></td>
-                    <td></td>
-                </tr>
+                ${riskRows}
             </tbody>
         </table>
     `;
