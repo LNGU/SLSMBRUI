@@ -251,13 +251,21 @@ body {
 /* Heatmap Card */
 .heatmap-header-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    gap: 10px;
 }
 
 .heatmap-header-row h3 {
     margin: 0;
+    margin-right: auto;
+}
+
+.heatmap-count {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+    margin-right: 8px;
 }
 
 .heatmap-toggle {

@@ -265,6 +265,12 @@ function initHeatmap(filter = 'risks') {
         ? heatmapData.filter(p => categoryKeys.some(key => p[key] > 0))
         : heatmapData;
     
+    // Update count display
+    const countEl = document.getElementById('heatmapCount');
+    if (countEl) {
+        countEl.textContent = `${filteredData.length} showing`;
+    }
+    
     // Create header row (sticky)
     let html = '<div class="heatmap-row heatmap-sticky-header">';
     html += '<div class="heatmap-header"></div>';
@@ -303,8 +309,11 @@ function initHeatmap(filter = 'risks') {
     // Add tooltip functionality
     initHeatmapTooltips();
     
-    // Setup toggle buttons
-    setupHeatmapToggle();
+    // Setup toggle buttons (only once)
+    if (!window.heatmapToggleInitialized) {
+        setupHeatmapToggle();
+        window.heatmapToggleInitialized = true;
+    }
 }
 
 function setupHeatmapToggle() {
