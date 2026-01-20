@@ -1,0 +1,18 @@
+# Data files
+*.xlsx
+*.csv
+
+# Power BI files
+*.pbix
+*.pbit
+
+# VS Code settings (optional - uncomment if you want to share settings)
+# .vscode/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*~
