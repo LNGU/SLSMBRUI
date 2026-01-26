@@ -284,8 +284,8 @@ function showCardDetail(cardType) {
 }
 
 function generateSavingsDetail() {
-    const publishers = dashboardData.publishers.filter(p => p.savings > 0);
-    const totalSavings = publishers.reduce((sum, p) => sum + p.savings, 0);
+    const publishers = dashboardData.publishers.filter(p => (p.savingsAmount || p.savings || 0) > 0);
+    const totalSavings = publishers.reduce((sum, p) => sum + (p.savingsAmount || p.savings || 0), 0);
     
     return `
         <div class="summary-box">
@@ -312,14 +312,16 @@ function generateSavingsDetail() {
                 </tr>
             </thead>
             <tbody>
-                ${publishers.sort((a, b) => b.savings - a.savings).map(pub => `
+                ${publishers.sort((a, b) => (b.savingsAmount || b.savings || 0) - (a.savingsAmount || a.savings || 0)).map(pub => {
+                    const amount = pub.savingsAmount || pub.savings || 0;
+                    return `
                     <tr>
                         <td>${pub.name}</td>
                         <td>${pub.savingsType || 'N/A'}</td>
-                        <td class="number">${formatCurrency(pub.savings)}</td>
-                        <td class="number">${((pub.savings / totalSavings) * 100).toFixed(2)}%</td>
+                        <td class="number">${formatCurrency(amount)}</td>
+                        <td class="number">${totalSavings > 0 ? ((amount / totalSavings) * 100).toFixed(2) : 0}%</td>
                     </tr>
-                `).join('')}
+                `}).join('')}
                 <tr class="total-row">
                     <td colspan="2"><strong>TOTAL</strong></td>
                     <td class="number"><strong>${formatCurrency(totalSavings)}</strong></td>
@@ -331,6 +333,9 @@ function generateSavingsDetail() {
             <h3>Savings Types Explained</h3>
             <p><strong>Cost Reduction:</strong> Actual reduction in contract value through negotiation</p>
             <p><strong>Cost Avoidance:</strong> Prevented price increases or avoided unnecessary spend</p>
+            <p><strong>License Optimization:</strong> Savings from right-sizing licenses or removing unused seats</p>
+            <p><strong>Renegotiation:</strong> Better terms achieved through contract renegotiation</p>
+            <p><strong>Consolidation:</strong> Savings from vendor/product consolidation</p>
         </div>
     `;
 }
@@ -338,53 +343,55 @@ function generateSavingsDetail() {
 function generateRisksDetail() {
     const heatmap = dashboardData.riskHeatmap;
     
+    // Helper to check if a risk value exists (supports both number and text)
+    const hasRisk = (val) => {
+        if (typeof val === 'number') return val > 0;
+        if (typeof val === 'string') return val.trim() !== '';
+        return false;
+    };
+    
     // Count risks by category and collect details
     const riskCounts = { sspa: 0, po: 0, finance: 0, legal: 0, inventory: 0 };
     const riskDetails = [];
     
     heatmap.forEach(pub => {
-        if (pub.sspa > 0) { 
-            riskCounts.sspa += pub.sspa; 
-            if (pub.details.sspa) {
-                riskDetails.push({ publisher: pub.name, category: 'SSPA', description: pub.details.sspa });
-            }
+        if (hasRisk(pub.sspa)) { 
+            riskCounts.sspa += 1; 
+            const desc = typeof pub.sspa === 'string' ? pub.sspa : (pub.details?.sspa || 'Risk identified');
+            riskDetails.push({ publisher: pub.name, category: 'SSPA', description: desc });
         }
-        if (pub.po > 0) { 
-            riskCounts.po += pub.po; 
-            if (pub.details.po) {
-                riskDetails.push({ publisher: pub.name, category: 'PO', description: pub.details.po });
-            }
+        if (hasRisk(pub.po)) { 
+            riskCounts.po += 1; 
+            const desc = typeof pub.po === 'string' ? pub.po : (pub.details?.po || 'Risk identified');
+            riskDetails.push({ publisher: pub.name, category: 'PO', description: desc });
         }
-        if (pub.finance > 0) { 
-            riskCounts.finance += pub.finance; 
-            if (pub.details.finance) {
-                riskDetails.push({ publisher: pub.name, category: 'Finance', description: pub.details.finance });
-            }
+        if (hasRisk(pub.finance)) { 
+            riskCounts.finance += 1; 
+            const desc = typeof pub.finance === 'string' ? pub.finance : (pub.details?.finance || 'Risk identified');
+            riskDetails.push({ publisher: pub.name, category: 'Finance', description: desc });
         }
-        if (pub.legal > 0) { 
-            riskCounts.legal += pub.legal; 
-            if (pub.details.legal) {
-                riskDetails.push({ publisher: pub.name, category: 'Legal', description: pub.details.legal });
-            }
+        if (hasRisk(pub.legal)) { 
+            riskCounts.legal += 1; 
+            const desc = typeof pub.legal === 'string' ? pub.legal : (pub.details?.legal || 'Risk identified');
+            riskDetails.push({ publisher: pub.name, category: 'Legal', description: desc });
         }
-        if (pub.inventory > 0) { 
-            riskCounts.inventory += pub.inventory; 
-            if (pub.details.inventory) {
-                riskDetails.push({ publisher: pub.name, category: 'Inventory', description: pub.details.inventory });
-            }
+        if (hasRisk(pub.inventory)) { 
+            riskCounts.inventory += 1; 
+            const desc = typeof pub.inventory === 'string' ? pub.inventory : (pub.details?.inventory || 'Risk identified');
+            riskDetails.push({ publisher: pub.name, category: 'Inventory', description: desc });
         }
     });
     
     const totalRisks = Object.values(riskCounts).reduce((a, b) => a + b, 0);
     
     // Generate detailed risk rows
-    const riskRows = riskDetails.map(risk => `
+    const riskRows = riskDetails.length > 0 ? riskDetails.map(risk => `
         <tr>
             <td>${risk.publisher}</td>
             <td><span class="risk-badge ${risk.category.toLowerCase()}">${risk.category}</span></td>
             <td>${risk.description}</td>
         </tr>
-    `).join('');
+    `).join('') : '<tr><td colspan="3" style="text-align: center; color: #888;">No risks recorded</td></tr>';
     
     return `
         <div class="summary-box">

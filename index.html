@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLS MBR Dashboard</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="data-view-styles.css">
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </head>
@@ -15,7 +17,8 @@
             <span class="last-refreshed">Last Refreshed<br><span id="lastRefreshed"></span></span>
         </div>
         <nav class="nav-tabs">
-            <button class="nav-tab active">Home</button>
+            <button class="nav-tab active" data-view="dashboard">Dashboard</button>
+            <button class="nav-tab" data-view="manage">Manage</button>
             <button class="nav-tab">Risk Details</button>
             <button class="nav-tab">CO/CSA...</button>
             <button class="nav-tab">Renewal...</button>
@@ -23,6 +26,10 @@
             <button class="nav-tab">Tickets...</button>
         </nav>
         <div class="header-right">
+            <button id="saveBackupBtn" class="save-backup-btn">
+                💾 Save Backup
+                <span id="unsavedIndicator" class="unsaved-indicator" style="display:none;">●</span>
+            </button>
             <span class="month-label" id="currentMonth"></span>
         </div>
     </header>
@@ -151,8 +158,69 @@
         </div>
     </div>
 
+    <script src="storage.js"></script>
+    <script src="calculations.js"></script>
     <script src="data.js"></script>
     <script src="charts.js"></script>
     <script src="modals.js"></script>
+    <script src="data-view-modal.js"></script>
+    <script>
+        // View switching logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            const dashboardView = document.querySelector('.dashboard');
+            const editorView = document.getElementById('dataEditorView');
+            
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const view = this.dataset.view;
+                    
+                    // Update active tab
+                    navTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show/hide views
+                    if (view === 'manage') {
+                        // Open the data view modal directly
+                        window.dataViewModal.open();
+                        // Keep dashboard tab visually active
+                        navTabs.forEach(t => t.classList.remove('active'));
+                        document.querySelector('[data-view="dashboard"]').classList.add('active');
+                        return;
+                    } else if (view === 'dashboard') {
+                        dashboardView.style.display = 'block';
+                        // Refresh charts in case data changed
+                        if (typeof refreshAllCharts === 'function') {
+                            refreshAllCharts();
+                        }
+                    }
+                });
+            });
+            
+            // Save Backup button
+            const saveBackupBtn = document.getElementById('saveBackupBtn');
+            if (saveBackupBtn) {
+                saveBackupBtn.addEventListener('click', function() {
+                    const name = prompt('Enter a name for this backup (optional):');
+                    if (name !== null) { // User didn't cancel
+                        Storage.createSnapshot(name || null);
+                        showToast('Backup saved successfully!', 'success');
+                    }
+                });
+            }
+        });
+        
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
 </body>
 </html>

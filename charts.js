@@ -6,7 +6,83 @@ document.addEventListener('DOMContentLoaded', function() {
     initSpendChart();
     initHeatmap();
     initComplianceChart();
+    initKpiDisplay();
+    
+    // Listen for data changes to refresh charts
+    window.addEventListener('dataChanged', function(e) {
+        refreshAllCharts();
+    });
 });
+
+// Store chart instances for updates
+let chartInstances = {};
+
+// Initialize KPI display values
+function initKpiDisplay() {
+    const kpis = dashboardData.kpis;
+    
+    // Update KPI card values
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    kpiCards.forEach(card => {
+        const kpiType = card.dataset.kpi;
+        const valueEl = card.querySelector('.kpi-value');
+        if (valueEl && kpis[kpiType] !== undefined) {
+            valueEl.textContent = Calculations.formatKpiValue(kpis[kpiType], kpiType);
+        }
+    });
+}
+
+// Refresh all charts after data change
+function refreshAllCharts() {
+    // Refresh dashboard data from storage
+    refreshDashboardData();
+    
+    // Update KPIs
+    initKpiDisplay();
+    
+    // Destroy and recreate charts
+    Object.values(chartInstances).forEach(chart => {
+        if (chart && chart.destroy) {
+            chart.destroy();
+        }
+    });
+    chartInstances = {};
+    
+    initSavingsChart();
+    initRisksChart();
+    initSpendChart();
+    initHeatmap();
+    initComplianceChart();
+    
+    // Update renewal card
+    updateRenewalCard();
+}
+
+// Update renewal card with computed data
+function updateRenewalCard() {
+    const renewals = dashboardData.upcomingRenewals;
+    
+    const items = document.querySelectorAll('.renewal-item');
+    items.forEach(item => {
+        const label = item.querySelector('.renewal-label');
+        const value = item.querySelector('.renewal-value');
+        
+        if (label && value) {
+            const labelText = label.textContent.trim();
+            if (labelText.includes('Days Until')) {
+                value.textContent = renewals.daysUntilNext;
+            } else if (labelText.includes('Publisher')) {
+                value.textContent = renewals.publisher;
+            } else if (labelText.includes('Renewal Due Date')) {
+                value.textContent = renewals.renewalDate;
+            } else if (labelText.includes('CSA')) {
+                value.textContent = renewals.csaExpThisQ;
+            } else if (labelText.includes('CO')) {
+                value.textContent = renewals.coExpThisQ;
+            }
+        }
+    });
+}
 
 // Initialize dynamic date display
 function initDateDisplay() {
@@ -35,7 +111,7 @@ function initSavingsChart() {
     const ctx = document.getElementById('savingsChart').getContext('2d');
     const data = dashboardData.potentialSavings;
     
-    new Chart(ctx, {
+    chartInstances.savings = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: data.labels,
@@ -92,7 +168,7 @@ function initRisksChart() {
     const ctx = document.getElementById('risksChart').getContext('2d');
     const data = dashboardData.risksTracking;
     
-    new Chart(ctx, {
+    chartInstances.risks = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: data.categories,
@@ -154,7 +230,7 @@ function initSpendChart() {
     const msdSpend = sortedData.map(d => d.msdSpend || 0.1);
     const tiamSpend = sortedData.map(d => d.tiamSpend || 0.1);
     
-    new Chart(ctx, {
+    chartInstances.spend = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: labels,
@@ -260,9 +336,16 @@ function initHeatmap(filter = 'risks') {
     const categories = ['SSPA', 'PO', 'Finance', 'Legal', 'Inventory'];
     const categoryKeys = ['sspa', 'po', 'finance', 'legal', 'inventory'];
     
+    // Helper to check if a risk value exists (supports both number and text)
+    const hasRisk = (val) => {
+        if (typeof val === 'number') return val > 0;
+        if (typeof val === 'string') return val.trim() !== '';
+        return false;
+    };
+    
     // Filter data based on toggle
     const filteredData = filter === 'risks' 
-        ? heatmapData.filter(p => categoryKeys.some(key => p[key] > 0))
+        ? heatmapData.filter(p => categoryKeys.some(key => hasRisk(p[key])))
         : heatmapData;
     
     // Update count display
@@ -286,19 +369,18 @@ function initHeatmap(filter = 'risks') {
         
         categoryKeys.forEach((key, index) => {
             const risk = publisher[key];
-            const detail = publisher.details && publisher.details[key] ? publisher.details[key] : '';
-            const hasDetail = detail !== '';
+            // For text values, the text IS the detail; for numbers, check details object
+            const isTextRisk = typeof risk === 'string' && risk.trim() !== '';
+            const detail = isTextRisk ? risk : (publisher.details && publisher.details[key] ? publisher.details[key] : '');
+            const riskExists = hasRisk(risk);
             
-            if (risk === 0) {
-                html += `<div class="heatmap-cell level-0" ${hasDetail ? `data-tooltip="${detail}"` : ''}>0</div>`;
-            } else if (risk === 1) {
-                html += `<div class="heatmap-cell level-1 has-risk" data-publisher="${publisher.name}" data-category="${categories[index]}" data-tooltip="${detail || 'Risk identified'}">${risk}</div>`;
-            } else if (risk === 2) {
-                html += `<div class="heatmap-cell level-2 has-risk" data-publisher="${publisher.name}" data-category="${categories[index]}" data-tooltip="${detail || 'Risk identified'}">${risk}</div>`;
-            } else if (risk >= 3) {
-                html += `<div class="heatmap-cell level-3 has-risk" data-publisher="${publisher.name}" data-category="${categories[index]}" data-tooltip="${detail || 'Risk identified'}">${risk}</div>`;
+            if (!riskExists) {
+                html += `<div class="heatmap-cell level-0">-</div>`;
             } else {
-                html += '<div class="heatmap-cell empty"></div>';
+                // Text risks always show as level-1 (single risk indicator)
+                const displayValue = isTextRisk ? '!' : risk;
+                const level = isTextRisk ? 1 : (risk >= 3 ? 3 : risk);
+                html += `<div class="heatmap-cell level-${level} has-risk" data-publisher="${publisher.name}" data-category="${categories[index]}" data-tooltip="${detail || 'Risk identified'}">${displayValue}</div>`;
             }
         });
         html += '</div>';
@@ -395,32 +477,10 @@ function initComplianceChart() {
     const ctx = document.getElementById('complianceChart').getContext('2d');
     const data = dashboardData.complianceHealth;
     
-    // Calculate which publishers fall into each category
-    const publishers = dashboardData.publishers.filter(p => p.renewalDate);
-    const today = new Date();
-    const eoq = new Date(today.getFullYear(), 2, 31); // March 31
-    const eoy = new Date(today.getFullYear(), 11, 31); // Dec 31
+    // Use pre-computed category lists if available
+    const categoryLists = data.categoryLists || [[], [], []];
     
-    const categories = {
-        pastDue: [],
-        dueByEoq: [],
-        dueByEoy: []
-    };
-    
-    publishers.forEach(pub => {
-        const renewalDate = new Date(pub.renewalDate);
-        if (renewalDate < today) {
-            categories.pastDue.push(pub.name);
-        } else if (renewalDate <= eoq) {
-            categories.dueByEoq.push(pub.name);
-        } else if (renewalDate <= eoy) {
-            categories.dueByEoy.push(pub.name);
-        }
-    });
-    
-    const categoryLists = [categories.pastDue, categories.dueByEoq, categories.dueByEoy];
-    
-    new Chart(ctx, {
+    chartInstances.compliance = new Chart(ctx, {
         type: 'doughnut',
         data: {
             labels: data.labels,
