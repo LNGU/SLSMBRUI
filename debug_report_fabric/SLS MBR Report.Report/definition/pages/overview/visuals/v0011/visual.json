@@ -1,0 +1,136 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "v0011",
+  "position": {
+    "x": 450,
+    "y": 390,
+    "width": 530,
+    "height": 290,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "publisher"
+                }
+              },
+              "queryRef": "fact_Risk.publisher",
+              "nativeQueryRef": "publisher",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "sspa"
+                }
+              },
+              "queryRef": "fact_Risk.sspa",
+              "nativeQueryRef": "sspa",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "po"
+                }
+              },
+              "queryRef": "fact_Risk.po",
+              "nativeQueryRef": "po",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "finance"
+                }
+              },
+              "queryRef": "fact_Risk.finance",
+              "nativeQueryRef": "finance",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "legal"
+                }
+              },
+              "queryRef": "fact_Risk.legal",
+              "nativeQueryRef": "legal",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_Risk"
+                    }
+                  },
+                  "Property": "inventory"
+                }
+              },
+              "queryRef": "fact_Risk.inventory",
+              "nativeQueryRef": "inventory",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Risk Score Heatmap'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

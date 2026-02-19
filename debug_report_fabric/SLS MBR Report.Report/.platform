@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "SLS MBR Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "08439244-a3fa-4acf-b6aa-b43e8d1ab5d2"
+  }
+}

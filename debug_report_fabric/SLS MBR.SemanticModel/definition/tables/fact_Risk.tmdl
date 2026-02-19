@@ -1,0 +1,72 @@
+table fact_Risk
+	lineageTag: 06437448-25c7-4681-8717-5ee03dcd6a0c
+	sourceLineageTag: [dbo].[fact_Risk]
+
+	column publisher
+		dataType: string
+		lineageTag: 1fb85449-b3c0-497a-965e-ac76055faea9
+		sourceLineageTag: publisher
+		summarizeBy: none
+		sourceColumn: publisher
+
+		annotation SummarizationSetBy = Automatic
+
+	column sspa
+		dataType: string
+		lineageTag: f03ac986-ff4f-4244-91f7-a41f334a740c
+		sourceLineageTag: sspa
+		summarizeBy: none
+		sourceColumn: sspa
+
+		annotation SummarizationSetBy = Automatic
+
+	column po
+		dataType: string
+		lineageTag: c2cfb4c6-6ba7-4829-a54a-d545ec6924f0
+		sourceLineageTag: po
+		summarizeBy: none
+		sourceColumn: po
+
+		annotation SummarizationSetBy = Automatic
+
+	column finance
+		dataType: string
+		lineageTag: 244e8c86-3f2a-41c7-8ba2-0e986bf5503f
+		sourceLineageTag: finance
+		summarizeBy: none
+		sourceColumn: finance
+
+		annotation SummarizationSetBy = Automatic
+
+	column legal
+		dataType: string
+		lineageTag: a937faa8-c6f3-42c4-a525-7d226d516e6e
+		sourceLineageTag: legal
+		summarizeBy: none
+		sourceColumn: legal
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory
+		dataType: string
+		lineageTag: 758c3d04-44f9-4f85-a6e2-9151a995bd37
+		sourceLineageTag: inventory
+		summarizeBy: none
+		sourceColumn: inventory
+
+		annotation SummarizationSetBy = Automatic
+
+	column details
+		dataType: string
+		lineageTag: 0bda47a0-2019-445e-9f48-6bd616e84e9c
+		sourceLineageTag: details
+		summarizeBy: none
+		sourceColumn: details
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_Risk = entity
+		mode: directLake
+		source
+			entityName: fact_Risk
+			expressionSource: 'DirectLake - lakehouse'

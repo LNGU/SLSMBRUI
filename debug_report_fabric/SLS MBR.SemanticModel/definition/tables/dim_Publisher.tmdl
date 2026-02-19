@@ -1,0 +1,93 @@
+table dim_Publisher
+	lineageTag: 4953da96-baf4-4344-91ef-fd91fcbe6996
+	sourceLineageTag: [dbo].[dim_Publisher]
+
+	column publisher_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 13352419-51e7-481a-97aa-91fc958053bd
+		sourceLineageTag: publisher_id
+		summarizeBy: none
+		sourceColumn: publisher_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: b948b23d-a587-4878-a28b-7c28b66d9ee0
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: 7e0a77e4-042f-4ea7-99a6-00726fd6580a
+		sourceLineageTag: title
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 3ea3ec5d-f7b9-4fc0-9e43-b5d04af43167
+		sourceLineageTag: type
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column contact
+		dataType: string
+		lineageTag: 76a1c22f-a4e8-4406-b0d2-9b01bc068fce
+		sourceLineageTag: contact
+		summarizeBy: none
+		sourceColumn: contact
+
+		annotation SummarizationSetBy = Automatic
+
+	column renewalDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a386f09c-f8ff-4b12-8af1-80f4c44af3a8
+		sourceLineageTag: renewalDate
+		summarizeBy: none
+		sourceColumn: renewalDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: 3ddddbe2-5525-4131-9c63-7a0598b7afab
+		sourceLineageTag: status
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column savingsAmount
+		dataType: double
+		formatString: 0
+		lineageTag: 7ba37cd6-9caa-4b3f-ba70-8f9f98298860
+		sourceLineageTag: savingsAmount
+		summarizeBy: none
+		sourceColumn: savingsAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column savingsType
+		dataType: string
+		lineageTag: e03e32eb-3c02-4b70-9d7d-e994439c76c7
+		sourceLineageTag: savingsType
+		summarizeBy: none
+		sourceColumn: savingsType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_Publisher = entity
+		mode: directLake
+		source
+			entityName: dim_Publisher
+			expressionSource: 'DirectLake - lakehouse'

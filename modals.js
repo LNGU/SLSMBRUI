@@ -79,7 +79,9 @@ function showKpiDetail(kpiType) {
             title = 'SNOW Tickets MTD';
             content = `
                 <div class="summary-box">
-                    <p>This value (706) is tracked externally in ServiceNow ticket system.</p>
+                    <p><strong>${dashboardData.kpis.snowTickets}</strong> tickets month-to-date.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">Data dynamically synced from Fabric Lakehouse table:<br/>
+                    <code style="font-size: 0.85em;">scm-dev/lakehouse/Tables/snowticketsmtd</code></p>
                 </div>
             `;
             break;
@@ -87,7 +89,9 @@ function showKpiDetail(kpiType) {
             title = 'ICM Tickets MTD';
             content = `
                 <div class="summary-box">
-                    <p>This value (130) is tracked externally in ICM ticket system.</p>
+                    <p><strong>${dashboardData.kpis.icmTickets}</strong> unique incidents month-to-date.</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">Data dynamically synced from Fabric Lakehouse table:<br/>
+                    <code style="font-size: 0.85em;">scm-dev/lakehouse/Tables/[ICM tickets MTD]</code></p>
                 </div>
             `;
             break;

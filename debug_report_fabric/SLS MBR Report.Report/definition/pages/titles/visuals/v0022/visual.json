@@ -1,0 +1,106 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "v0022",
+  "position": {
+    "x": 20,
+    "y": 120,
+    "width": 1020,
+    "height": 500,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_ManagedTitle"
+                    }
+                  },
+                  "Property": "title"
+                }
+              },
+              "queryRef": "dim_ManagedTitle.title",
+              "nativeQueryRef": "title",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_ManagedTitle"
+                    }
+                  },
+                  "Property": "publisher"
+                }
+              },
+              "queryRef": "dim_ManagedTitle.publisher",
+              "nativeQueryRef": "publisher",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_ManagedTitle"
+                    }
+                  },
+                  "Property": "category"
+                }
+              },
+              "queryRef": "dim_ManagedTitle.category",
+              "nativeQueryRef": "category",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_ManagedTitle"
+                    }
+                  },
+                  "Property": "notes"
+                }
+              },
+              "queryRef": "dim_ManagedTitle.notes",
+              "nativeQueryRef": "notes",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Managed Titles'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,157 @@
+table fact_Spend
+	lineageTag: d3cfc29e-f374-497b-b0e4-c102b19af523
+	sourceLineageTag: [dbo].[fact_Spend]
+
+	measure 'Total Company Spend' = SUM(fact_Spend[companySpend])
+		formatString: $#,##0
+		lineageTag: c3fa0d28-a521-4f6a-bcf1-1d9ecc6c2f9a
+
+	measure 'Total MSD Spend' = SUM(fact_Spend[msdSpend])
+		formatString: $#,##0
+		lineageTag: be928328-a6e2-4b40-aa04-4e7ce753c7c7
+
+	measure 'Total TI&M Spend' = SUM(fact_Spend[tiamSpend])
+		formatString: $#,##0
+		lineageTag: 19453dce-ef55-4440-93dc-a12cc0cf4dc0
+
+	measure 'Total Savings' = SUM(dim_Publisher[savingsAmount])
+		formatString: $#,##0
+		lineageTag: b16e754f-4938-4ebe-b166-a8f4e00bf723
+
+	measure 'Company Spend Fmt' = VAR Spend = [Total Company Spend] RETURN IF(Spend >= 1000000, FORMAT(Spend / 1000000, "0.00") & "M", IF(Spend >= 1000, FORMAT(Spend / 1000, "0.0") & "K", FORMAT(Spend, "#,##0")))
+		lineageTag: c25f0dfe-bfb9-4423-97fc-37bf77d4cb8f
+
+	measure 'MSD Spend Fmt' = VAR Spend = [Total MSD Spend] RETURN IF(Spend >= 1000000, FORMAT(Spend / 1000000, "0.00") & "M", IF(Spend >= 1000, FORMAT(Spend / 1000, "0.0") & "K", FORMAT(Spend, "#,##0")))
+		lineageTag: 9a8afb85-31cc-4a91-a9ec-10015140c570
+
+	measure 'TI&M Spend Fmt' = VAR Spend = [Total TI&M Spend] RETURN IF(Spend >= 1000000, FORMAT(Spend / 1000000, "0.00") & "M", IF(Spend >= 1000, FORMAT(Spend / 1000, "0.0") & "K", FORMAT(Spend, "#,##0")))
+		lineageTag: 10cc6ee6-e033-4e66-9517-b8c194aea54a
+
+	measure 'Savings Fmt' = VAR Spend = [Total Savings] RETURN IF(Spend >= 1000000, "$" & FORMAT(Spend / 1000000, "0.00") & "M", IF(Spend >= 1000, "$" & FORMAT(Spend / 1000, "0.0") & "K", FORMAT(Spend, "$#,##0")))
+		lineageTag: a15a2940-4d6a-4b67-bac7-dd3cb148826a
+
+	measure 'Managed Publishers' = DISTINCTCOUNT(dim_Publisher[name])
+		formatString: #,##0
+		lineageTag: bfe1ebaf-cc4f-4acf-b00f-6d3f950cd5ee
+
+	measure 'Managed Titles' = DISTINCTCOUNT(dim_ManagedTitle[title])
+		formatString: #,##0
+		lineageTag: 7fdeb56d-ba9f-46cc-b754-a54b9693eab4
+
+	measure 'SNOW Tickets MTD' = CALCULATE(SUM(fact_ExternalKPI[value]), fact_ExternalKPI[name] = "SNOW Tickets MTD")
+		formatString: #,##0
+		lineageTag: c1e6459e-3286-4025-891b-a34e06e9b685
+
+	measure 'ICM Tickets MTD' = CALCULATE(SUM(fact_ExternalKPI[value]), fact_ExternalKPI[name] = "ICM Tickets MTD")
+		formatString: #,##0
+		lineageTag: 34f7b5a7-e49c-48f2-82e8-c15ebc297c0a
+
+	measure 'SSPA Risks' = CALCULATE(DISTINCTCOUNT(fact_Risk[publisher]), fact_Risk[sspa] <> "")
+		formatString: #,##0
+		lineageTag: b6e42fdf-4f0f-4c63-b2fe-d93ddd4e9f38
+
+	measure 'PO Risks' = CALCULATE(DISTINCTCOUNT(fact_Risk[publisher]), fact_Risk[po] <> "")
+		formatString: #,##0
+		lineageTag: 97ea1e2c-3d0b-46d1-ac46-46f0a020adff
+
+	measure 'Finance Risks' = CALCULATE(DISTINCTCOUNT(fact_Risk[publisher]), fact_Risk[finance] <> "")
+		formatString: #,##0
+		lineageTag: e9899688-8d2c-4ebf-b2f6-1ab3a491c140
+
+	measure 'Legal Risks' = CALCULATE(DISTINCTCOUNT(fact_Risk[publisher]), fact_Risk[legal] <> "")
+		formatString: #,##0
+		lineageTag: 94a8af07-4831-4626-955b-44b0112844f5
+
+	measure 'Inventory Risks' = CALCULATE(DISTINCTCOUNT(fact_Risk[publisher]), fact_Risk[inventory] <> "")
+		formatString: #,##0
+		lineageTag: 47cf0a4b-e90d-447c-9e1f-ed9f0f13cc7d
+
+	measure 'Total Risks' = [SSPA Risks] + [PO Risks] + [Finance Risks] + [Legal Risks] + [Inventory Risks]
+		formatString: #,##0
+		lineageTag: a4501ed6-b4f8-49a2-9c0f-f76fbfa7e11d
+
+	measure 'Days Until Next Renewal' = VAR NextRenewal = CALCULATE(MIN(dim_Publisher[renewalDate]), dim_Publisher[renewalDate] >= TODAY()) RETURN IF(ISBLANK(NextRenewal), BLANK(), NextRenewal - TODAY())
+		formatString: #,##0
+		lineageTag: 331ac162-26f2-4a81-9a43-8799589467ad
+
+	measure 'Next Renewal Publisher' = VAR NextDate = CALCULATE(MIN(dim_Publisher[renewalDate]), dim_Publisher[renewalDate] >= TODAY()) RETURN CALCULATE(FIRSTNONBLANK(dim_Publisher[name], 1), dim_Publisher[renewalDate] = NextDate)
+		lineageTag: 438e6f5e-1ca4-4448-8c93-f045c4a6da2e
+
+	measure 'Next Renewal Date' = CALCULATE(MIN(dim_Publisher[renewalDate]), dim_Publisher[renewalDate] >= TODAY())
+		formatString: M/d/yyyy
+		lineageTag: 4226b8cc-b6e5-40a8-ba13-e14db5ac799b
+
+	measure 'Renewals This Quarter' = VAR QEnd = EOMONTH(TODAY(), 3 - MOD(MONTH(TODAY()) - 1, 3) - 1) RETURN CALCULATE(DISTINCTCOUNT(dim_Publisher[name]), dim_Publisher[renewalDate] >= TODAY(), dim_Publisher[renewalDate] <= QEnd)
+		formatString: #,##0
+		lineageTag: 1766f047-1b9f-45b5-af7f-955b1739e382
+
+	measure 'Renewals This Year' = VAR YEnd = DATE(YEAR(TODAY()), 12, 31) RETURN CALCULATE(DISTINCTCOUNT(dim_Publisher[name]), dim_Publisher[renewalDate] >= TODAY(), dim_Publisher[renewalDate] <= YEnd)
+		formatString: #,##0
+		lineageTag: fe0cf276-35ed-4110-91b5-bf6ce40e4501
+
+	measure 'Past Due Renewals' = CALCULATE(DISTINCTCOUNT(dim_Publisher[name]), dim_Publisher[renewalDate] < TODAY(), dim_Publisher[renewalDate] <> BLANK())
+		formatString: #,##0
+		lineageTag: d053e631-23a3-4ee1-a477-de9415f01a48
+
+	column publisher
+		dataType: string
+		lineageTag: ff9691d9-89a4-449f-a2a2-c6a4a8f98087
+		sourceLineageTag: publisher
+		summarizeBy: none
+		sourceColumn: publisher
+
+		annotation SummarizationSetBy = Automatic
+
+	column companySpend
+		dataType: double
+		formatString: 0
+		lineageTag: 2ab1708e-5a13-459c-a55a-a5a8eeffb1cc
+		sourceLineageTag: companySpend
+		summarizeBy: none
+		sourceColumn: companySpend
+
+		annotation SummarizationSetBy = Automatic
+
+	column msdSpend
+		dataType: double
+		formatString: 0
+		lineageTag: 074a0d0c-015b-4ebd-bc6d-b125422c9ab9
+		sourceLineageTag: msdSpend
+		summarizeBy: none
+		sourceColumn: msdSpend
+
+		annotation SummarizationSetBy = Automatic
+
+	column tiamSpend
+		dataType: double
+		formatString: 0
+		lineageTag: 9b075efd-3bde-4021-b542-d84bc3caa981
+		sourceLineageTag: tiamSpend
+		summarizeBy: none
+		sourceColumn: tiamSpend
+
+		annotation SummarizationSetBy = Automatic
+
+	column fiscalYear
+		dataType: string
+		lineageTag: 1ac737b9-d7ca-40a1-9b60-17c3b3b111e1
+		sourceLineageTag: fiscalYear
+		summarizeBy: none
+		sourceColumn: fiscalYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: 7a4e3971-55b5-49f0-af72-c4656039fc58
+		sourceLineageTag: notes
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_Spend = entity
+		mode: directLake
+		source
+			entityName: fact_Spend
+			expressionSource: 'DirectLake - lakehouse'

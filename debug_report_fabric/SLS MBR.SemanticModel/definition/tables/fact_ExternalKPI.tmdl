@@ -1,0 +1,56 @@
+table fact_ExternalKPI
+	lineageTag: 1d0df99b-eb44-4311-a3ed-1eb2fa1c68b7
+	sourceLineageTag: [dbo].[fact_ExternalKPI]
+
+	column name
+		dataType: string
+		lineageTag: f335c85e-aed5-49d9-b923-ee53dc7d69c4
+		sourceLineageTag: name
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column value
+		dataType: double
+		formatString: 0
+		lineageTag: 7c4730a9-7875-47dc-9b9e-35ad9d2c8a2d
+		sourceLineageTag: value
+		summarizeBy: none
+		sourceColumn: value
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit
+		dataType: string
+		lineageTag: e3e21559-ad9b-4352-993e-7585b5164c9b
+		sourceLineageTag: unit
+		summarizeBy: none
+		sourceColumn: unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column source
+		dataType: string
+		lineageTag: e42a2e2d-f87d-4ed4-b922-1b6f85c58a1d
+		sourceLineageTag: source
+		summarizeBy: none
+		sourceColumn: source
+
+		annotation SummarizationSetBy = Automatic
+
+	column lastUpdated
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: b3057333-c233-4401-8f2d-b6c70c9c579a
+		sourceLineageTag: lastUpdated
+		summarizeBy: none
+		sourceColumn: lastUpdated
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_ExternalKPI = entity
+		mode: directLake
+		source
+			entityName: fact_ExternalKPI
+			expressionSource: 'DirectLake - lakehouse'

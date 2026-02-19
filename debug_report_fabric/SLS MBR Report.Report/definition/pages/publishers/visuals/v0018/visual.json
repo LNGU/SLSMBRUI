@@ -1,0 +1,151 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "name": "v0018",
+  "position": {
+    "x": 20,
+    "y": 120,
+    "width": 1020,
+    "height": 400,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "name"
+                }
+              },
+              "queryRef": "dim_Publisher.name",
+              "nativeQueryRef": "name",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "title"
+                }
+              },
+              "queryRef": "dim_Publisher.title",
+              "nativeQueryRef": "title",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "type"
+                }
+              },
+              "queryRef": "dim_Publisher.type",
+              "nativeQueryRef": "type",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "contact"
+                }
+              },
+              "queryRef": "dim_Publisher.contact",
+              "nativeQueryRef": "contact",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "renewalDate"
+                }
+              },
+              "queryRef": "dim_Publisher.renewalDate",
+              "nativeQueryRef": "renewalDate",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "dim_Publisher.status",
+              "nativeQueryRef": "status",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_Publisher"
+                    }
+                  },
+                  "Property": "savingsAmount"
+                }
+              },
+              "queryRef": "dim_Publisher.savingsAmount",
+              "nativeQueryRef": "savingsAmount",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Publishers Overview'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

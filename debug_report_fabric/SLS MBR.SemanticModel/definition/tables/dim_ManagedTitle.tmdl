@@ -1,0 +1,55 @@
+table dim_ManagedTitle
+	lineageTag: 88232449-5768-4f33-b97e-97d0a255ecb8
+	sourceLineageTag: [dbo].[dim_ManagedTitle]
+
+	column title
+		dataType: string
+		lineageTag: 7dab8ec1-0775-4b22-9058-ad5d35293d70
+		sourceLineageTag: title
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column publisher
+		dataType: string
+		lineageTag: 06145f9c-63c7-477c-bcf5-078613317f2d
+		sourceLineageTag: publisher
+		summarizeBy: none
+		sourceColumn: publisher
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 4ef2d3b5-8c81-41ad-a7d3-312cc947f3cf
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column licenseCount
+		dataType: int64
+		formatString: 0
+		lineageTag: 5be67399-3d06-4546-92ad-efc8e340a370
+		sourceLineageTag: licenseCount
+		summarizeBy: none
+		sourceColumn: licenseCount
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: fcc6718d-c995-442c-b69e-ad935e0c5bda
+		sourceLineageTag: notes
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_ManagedTitle = entity
+		mode: directLake
+		source
+			entityName: dim_ManagedTitle
+			expressionSource: 'DirectLake - lakehouse'

@@ -1,0 +1,11 @@
+relationship 6753e99a-98ae-4fa8-8f1b-b9fa298264c9
+	fromColumn: fact_Spend.publisher
+	toColumn: dim_Publisher.name
+
+relationship 8b39c334-d35d-442a-924f-04bcb09c8329
+	fromColumn: fact_Risk.publisher
+	toColumn: dim_Publisher.name
+
+relationship 65be5ad6-a2e8-4ba2-ad8f-b6f270362c57
+	fromColumn: dim_ManagedTitle.publisher
+	toColumn: dim_Publisher.name

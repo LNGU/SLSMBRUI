@@ -16,6 +16,7 @@ A comprehensive **Software License Services Monthly Business Review Dashboard** 
 - [Business Process Flow](#business-process-flow)
 - [Getting Started](#getting-started)
 - [File Structure](#file-structure)
+- [Microsoft Fabric Deployment](#-microsoft-fabric-deployment)
 
 ---
 
@@ -389,7 +390,82 @@ The dashboard aggregates data from:
 
 ---
 
-## 📝 License
+## � Microsoft Fabric Deployment
+
+The dashboard can be deployed to Microsoft Fabric for enterprise-level reporting with Direct Lake mode.
+
+### Prerequisites
+
+```bash
+# Create and activate virtual environment
+python -m venv .venv
+.venv\Scripts\activate  # Windows
+source .venv/bin/activate  # macOS/Linux
+
+# Install required packages
+pip install azure-storage-file-datalake azure-identity deltalake pandas
+```
+
+### Fabric Components
+
+| Script | Purpose |
+|--------|---------|
+| `deploy_report_to_fabric.py` | Deploy TMDL semantic model + PBIR report via Git integration |
+| `load_data_to_lakehouse.py` | Export data.js to CSV, upload to OneLake, load Delta tables |
+| `deploy_monthly.py` | Orchestrate monthly deployment pipeline |
+
+### Quick Start
+
+```bash
+# Full deployment (data + report)
+python deploy_monthly.py --workspace scm-dev
+
+# Or run individual steps:
+# 1. Load data to Lakehouse (6 Delta tables)
+python load_data_to_lakehouse.py --workspace scm-dev
+
+# 2. Deploy semantic model + report to Git
+python deploy_report_to_fabric.py --workspace scm-dev
+```
+
+### Workspace Configuration
+
+| Setting | Value |
+|---------|-------|
+| Workspace | `scm-dev` (d3c735d2-8f5c-4d1a-b825-0cc5353a8de2) |
+| Lakehouse | `lakehouse` (aa363084-8758-4301-8697-06bff14834cd) |
+| Git Repo | `MicrosoftIT/OneITVSO/TIM-SCM-SCMGMT-AutomationDocs` |
+| Branch | `PowerBI` |
+
+### Delta Tables
+
+| Table | Source | Description |
+|-------|--------|-------------|
+| `dim_Publisher` | publishers | Publisher dimension with renewal dates |
+| `dim_Date` | Generated | Date dimension for time filtering |
+| `fact_Spend` | Calculated | Spend facts tied to publishers |
+| `fact_Risk` | risks | Risk scores by category |
+| `dim_ManagedTitle` | managedTitles | Software titles under management |
+| `fact_ExternalKPI` | External API | KPIs from Fabric Semantic Models |
+
+### Report Pages
+
+1. **SLS MBR Overview** - KPI cards, savings chart, risk tracking, renewals
+2. **Publishers & Renewals** - Detailed publisher table with renewal countdown
+3. **Risk Details** - Full risk matrix by publisher
+4. **Managed Titles** - Searchable software titles list
+
+### Authentication
+
+Uses `DefaultAzureCredential` which supports:
+- Azure CLI (`az login`)
+- Visual Studio Code Azure account
+- Environment variables (`AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `AZURE_TENANT_ID`)
+- Managed Identity (Azure VMs, Functions)
+
+---
+
+## �📝 License
 
 Internal Microsoft Tool - Software License Services Team
 
