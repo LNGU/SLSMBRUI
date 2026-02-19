@@ -270,6 +270,11 @@ MEASURES = [
          'RETURN IF(ISBLANK(Cnt), 0, Cnt)'
      ),
      "formatString": "0"},
+    
+    # Last Refreshed timestamp
+    {"name": "Last Refreshed",
+     "expression": "NOW()",
+     "formatString": "MMM d, yyyy h:mm AM/PM"},
 ]
 
 
@@ -1078,6 +1083,11 @@ class ReportBuilder:
         vid, v = self.bar_chart(margin + chart_w + section_gap, row3_y, chart_w, chart_h,
             "fact_Spend", "publisher", "fact_Spend", "msdSpend",
             "MSD Spend by Publisher")
+        visuals[vid] = v
+
+        # Last Refreshed indicator (top right, next to slicers)
+        vid, v = self.card_measure(page_w - 180, margin, 160, slicer_h,
+            "fact_Spend", "Last Refreshed", "Last Refreshed")
         visuals[vid] = v
 
         self.pages[pid] = {
