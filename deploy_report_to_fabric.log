@@ -1,34 +1,35 @@
-2026-02-18 18:56:34,175 INFO ============================================================
-2026-02-18 18:56:34,175 INFO SLS MBR FABRIC DEPLOYMENT
-2026-02-18 18:56:34,176 INFO ============================================================
-2026-02-18 18:56:46,097 INFO Workspace: scm-dev (d3c735d2-8f5c-4d1a-b825-0cc5353a8de2)
-2026-02-18 18:56:46,569 INFO Lakehouse: lakehouse (aa363084-8758-4301-8697-06bff14834cd)
-2026-02-18 18:56:46,577 INFO Semantic model: 6 tables, 3 relationships, 26 measures, 12 files
-2026-02-18 18:56:46,599 INFO Report: 4 pages, 45 visuals, 53 files
-2026-02-18 18:56:46,993 INFO Git: MicrosoftIT/OneITVSO/TIM-SCM-SCMGMT-AutomationDocs branch=PowerBI dir=
-2026-02-18 18:56:47,206 INFO Branch tip: cc0147cfe152...
-2026-02-18 18:56:47,209 INFO Pushing semantic model + report to Git ...
-2026-02-18 18:56:47,440 INFO   /SLS MBR.SemanticModel: 12 existing files
-2026-02-18 18:56:47,719 INFO   /SLS MBR Report.Report: 53 existing files
-2026-02-18 18:56:47,721 INFO   Total changes: 65
-2026-02-18 18:56:48,757 INFO Pushed! New commit: c1789fe8d3bd...
-2026-02-18 18:56:48,757 INFO Triggering 'Update from Git' ...
-2026-02-18 18:57:03,660 INFO workspace_head=cc0147cfe152..., remote=c1789fe8d3bd...
-2026-02-18 18:57:03,661 INFO Changes: 2
-2026-02-18 18:57:03,662 INFO   Modified: dataset - SLS MBR
-2026-02-18 18:57:03,663 INFO   Modified: report - SLS MBR Report
-2026-02-18 18:57:08,039 INFO Update from Git response: 202
-2026-02-18 18:57:13,291 INFO   Poll 1: Succeeded
-2026-02-18 18:57:13,291 INFO Update from Git completed successfully!
-2026-02-18 18:57:23,915 INFO Semantic model: b3bd822f-5f11-44c6-8ce2-c9d56bda271d
-2026-02-18 18:57:24,253 INFO Report URL: https://msit.powerbi.com/groups/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/reports/a0c27020-623f-4d07-b271-1df1a17bd26a
-2026-02-18 18:57:24,254 INFO 
-2026-02-18 18:57:24,255 INFO STEP: Refresh semantic model (Direct Lake framing)
-2026-02-18 18:57:24,256 INFO ----------------------------------------
-2026-02-18 18:57:24,257 INFO Triggering refresh for dataset b3bd822f-5f11-44c6-8ce2-c9d56bda271d...
-2026-02-18 18:57:24,742 INFO Refresh triggered, polling for completion...
-2026-02-18 18:57:30,019 INFO Refresh completed! (2026-02-19T02:57:25.927Z → 2026-02-19T02:57:28.467Z)
-2026-02-18 18:57:30,021 INFO 
-2026-02-18 18:57:30,023 INFO ============================================================
-2026-02-18 18:57:30,026 INFO DEPLOYMENT COMPLETE
-2026-02-18 18:57:30,030 INFO ============================================================
+2026-02-24 13:07:12,116 INFO ============================================================
+2026-02-24 13:07:12,118 INFO SLS MBR FABRIC DEPLOYMENT
+2026-02-24 13:07:12,118 INFO ============================================================
+2026-02-24 13:07:17,732 INFO Workspace: scm-dev (d3c735d2-8f5c-4d1a-b825-0cc5353a8de2)
+2026-02-24 13:07:18,095 INFO Lakehouse: lakehouse (aa363084-8758-4301-8697-06bff14834cd)
+2026-02-24 13:07:18,097 INFO Semantic model: 6 tables, 3 relationships, 26 measures, 12 files
+2026-02-24 13:07:18,103 INFO Report: 4 pages, 45 visuals, 53 files
+2026-02-24 13:07:18,803 INFO Git: MicrosoftIT/OneITVSO/TIM-SCM-SCMGMT-AutomationDocs branch=PowerBI dir=
+2026-02-24 13:07:18,990 INFO Branch tip: 32bb6890bb02...
+2026-02-24 13:07:18,990 INFO Pushing semantic model + report to Git ...
+2026-02-24 13:07:19,464 INFO   /SLS MBR.SemanticModel: 12 existing files
+2026-02-24 13:07:19,696 INFO   /SLS MBR Report.Report: 54 existing files
+2026-02-24 13:07:19,696 INFO   Total changes: 66
+2026-02-24 13:07:21,564 INFO Pushed! New commit: 395fe3a7c917...
+2026-02-24 13:07:21,564 INFO Triggering 'Update from Git' ...
+2026-02-24 13:07:31,239 INFO workspace_head=32bb6890bb02..., remote=395fe3a7c917...
+2026-02-24 13:07:31,239 INFO Changes: 2
+2026-02-24 13:07:31,241 INFO   Modified: dataset - SLS MBR
+2026-02-24 13:07:31,242 INFO   Modified: report - SLS MBR Report
+2026-02-24 13:07:35,946 INFO Update from Git response: 202
+2026-02-24 13:07:41,240 INFO   Poll 1: Succeeded
+2026-02-24 13:07:41,240 INFO Update from Git completed successfully!
+2026-02-24 13:07:46,943 INFO Semantic model: b3bd822f-5f11-44c6-8ce2-c9d56bda271d
+2026-02-24 13:07:47,429 INFO Report URL: https://msit.powerbi.com/groups/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/reports/a0c27020-623f-4d07-b271-1df1a17bd26a
+2026-02-24 13:07:47,429 INFO 
+2026-02-24 13:07:47,437 INFO STEP: Refresh semantic model (Direct Lake framing)
+2026-02-24 13:07:47,437 INFO ----------------------------------------
+2026-02-24 13:07:47,437 INFO Triggering refresh for dataset b3bd822f-5f11-44c6-8ce2-c9d56bda271d...
+2026-02-24 13:07:47,931 INFO Refresh triggered, polling for completion...
+2026-02-24 13:07:53,202 INFO   Refresh status: Unknown (poll 1)
+2026-02-24 13:07:58,491 INFO Refresh completed! (2026-02-24T21:07:47.707Z → 2026-02-24T21:07:52.373Z)
+2026-02-24 13:07:58,497 INFO 
+2026-02-24 13:07:58,497 INFO ============================================================
+2026-02-24 13:07:58,497 INFO DEPLOYMENT COMPLETE
+2026-02-24 13:07:58,497 INFO ============================================================

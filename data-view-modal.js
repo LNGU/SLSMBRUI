@@ -104,6 +104,15 @@ class DataViewModal {
                             </svg>
                             Export
                         </button>
+                        <button class="btn btn-ghost" id="dv-import-excel">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="12" y1="18" x2="12" y2="12"/>
+                                <polyline points="9 15 12 12 15 15"/>
+                            </svg>
+                            Import Excel
+                        </button>
                         <button class="btn btn-ghost" id="dv-history">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/>
@@ -332,6 +341,7 @@ class DataViewModal {
         document.getElementById('dv-add-field').addEventListener('click', () => this.openAddFieldModal());
         document.getElementById('dv-add-row').addEventListener('click', () => this.openAddRowModal());
         document.getElementById('dv-export').addEventListener('click', () => this.exportData());
+        document.getElementById('dv-import-excel').addEventListener('click', () => this.importExcel());
         document.getElementById('dv-history').addEventListener('click', () => this.toggleHistoryPanel());
         document.getElementById('dv-save-all').addEventListener('click', () => this.saveAllChanges());
 
@@ -1601,6 +1611,211 @@ class DataViewModal {
         URL.revokeObjectURL(url);
         
         this.showToast('Data exported to CSV', 'success');
+    }
+
+    // Import from Excel
+    importExcel() {
+        if (typeof XLSX === 'undefined') {
+            alert('Excel import library (SheetJS) not loaded. Check your internet connection and reload.');
+            return;
+        }
+
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.xlsx,.xls,.csv';
+        input.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                try {
+                    const data = new Uint8Array(evt.target.result);
+                    const workbook = XLSX.read(data, { type: 'array', cellDates: true });
+                    const result = this._mapExcelToRawData(workbook);
+
+                    if (!result || Object.keys(result).length === 0) {
+                        alert('No recognized data sheets found.\n\nExpected sheet names containing:\n' +
+                              '• "Publisher" — publisher records\n' +
+                              '• "Spend" — spend data\n' +
+                              '• "Risk" — risk data\n' +
+                              '• "Title" or "Managed" — managed titles\n' +
+                              '• "KPI" or "External" — external KPIs');
+                        return;
+                    }
+
+                    // Show summary and confirm
+                    const summary = Object.entries(result.summary)
+                        .map(([key, count]) => `  ${key}: ${count} records`)
+                        .join('\n');
+                    const msg = `Import found:\n${summary}\n\nThis will replace the matching data sections. Continue?`;
+                    if (!confirm(msg)) return;
+
+                    // Load current raw data and merge imported sections
+                    const rawData = Storage.loadData(window.defaultRawData);
+
+                    if (result.data.publishers) rawData.publishers = result.data.publishers;
+                    if (result.data.spendData) rawData.spendData = result.data.spendData;
+                    if (result.data.riskData) rawData.riskData = result.data.riskData;
+                    if (result.data.managedTitles) rawData.managedTitles = result.data.managedTitles;
+                    if (result.data.externalKpis) rawData.externalKpis = result.data.externalKpis;
+
+                    // Bump version
+                    rawData.datasetVersion = `FY26_EXCEL_IMPORT_${new Date().toISOString().split('T')[0]}`;
+
+                    // Save
+                    Storage.saveData(rawData);
+                    Object.assign(window.rawData, rawData);
+
+                    // Refresh everything
+                    if (typeof refreshDashboardData === 'function') refreshDashboardData();
+                    if (typeof refreshAllCharts === 'function') refreshAllCharts();
+                    this.loadData();
+                    this.renderTable();
+
+                    this.showToast(`Imported ${file.name} successfully`, 'success');
+                    this.recordChange('create', file.name, { changes: [{ field: 'Import', oldValue: '', newValue: `Excel import: ${summary.replace(/\n/g, ', ')}` }] });
+                } catch (err) {
+                    console.error('Excel import error:', err);
+                    alert('Failed to import Excel file:\n' + err.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
+        input.click();
+    }
+
+    _mapExcelToRawData(workbook) {
+        const result = { data: {}, summary: {} };
+        const sheetNames = workbook.SheetNames;
+
+        for (const name of sheetNames) {
+            const lower = name.toLowerCase();
+            const sheet = workbook.Sheets[name];
+            const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+            if (rows.length === 0) continue;
+
+            if (lower.includes('publisher') && !lower.includes('managed')) {
+                result.data.publishers = this._mapPublishersSheet(rows);
+                result.summary['Publishers'] = result.data.publishers.length;
+            } else if (lower.includes('spend')) {
+                result.data.spendData = this._mapSpendSheet(rows);
+                result.summary['Spend'] = result.data.spendData.length;
+            } else if (lower.includes('risk')) {
+                result.data.riskData = this._mapRiskSheet(rows);
+                result.summary['Risks'] = result.data.riskData.length;
+            } else if (lower.includes('title') || lower.includes('managed')) {
+                result.data.managedTitles = this._mapTitlesSheet(rows);
+                result.summary['Managed Titles'] = result.data.managedTitles.length;
+            } else if (lower.includes('kpi') || lower.includes('external')) {
+                result.data.externalKpis = this._mapKpisSheet(rows);
+                result.summary['External KPIs'] = result.data.externalKpis.length;
+            }
+        }
+
+        return Object.keys(result.data).length > 0 ? result : null;
+    }
+
+    // Fuzzy-find a column header from a row object's keys
+    _findCol(row, candidates) {
+        const keys = Object.keys(row);
+        for (const candidate of candidates) {
+            const lower = candidate.toLowerCase();
+            // Exact match
+            const exact = keys.find(k => k.toLowerCase() === lower);
+            if (exact) return exact;
+        }
+        for (const candidate of candidates) {
+            const lower = candidate.toLowerCase();
+            // Substring match
+            const partial = keys.find(k => k.toLowerCase().includes(lower) || lower.includes(k.toLowerCase()));
+            if (partial) return partial;
+        }
+        return null;
+    }
+
+    _val(row, candidates, fallback = '') {
+        const key = this._findCol(row, candidates);
+        if (!key) return fallback;
+        const v = row[key];
+        return (v === null || v === undefined) ? fallback : v;
+    }
+
+    _numVal(row, candidates, fallback = 0) {
+        const v = this._val(row, candidates, null);
+        if (v === null || v === '') return fallback;
+        const n = parseFloat(String(v).replace(/[$,]/g, ''));
+        return isNaN(n) ? fallback : n;
+    }
+
+    _dateVal(row, candidates) {
+        const v = this._val(row, candidates, '');
+        if (!v) return '';
+        if (v instanceof Date) {
+            return v.toISOString().split('T')[0];
+        }
+        // Try parsing common date formats
+        const d = new Date(v);
+        if (!isNaN(d.getTime())) return d.toISOString().split('T')[0];
+        return String(v);
+    }
+
+    _mapPublishersSheet(rows) {
+        return rows.map((row, i) => ({
+            id: this._numVal(row, ['ID', 'Publisher ID'], i + 1),
+            name: String(this._val(row, ['Name', 'Publisher Name', 'Publisher', 'Vendor'])),
+            title: String(this._val(row, ['Title', 'Product', 'Product Title', 'Software', 'Software Title'])),
+            type: String(this._val(row, ['Type', 'License Type', 'Lic Type'], 'SaaS')),
+            contact: String(this._val(row, ['Contact', 'Owner', 'Manager'])),
+            renewalDate: this._dateVal(row, ['Renewal Date', 'Renewal', 'Expiry', 'Expiration']),
+            status: String(this._val(row, ['Status'], 'Active')),
+            savingsAmount: this._numVal(row, ['Savings Amount', 'Savings', 'Saving']),
+            savingsType: this._val(row, ['Savings Type', 'Saving Type'], null) || null,
+        })).filter(p => p.name);
+    }
+
+    _mapSpendSheet(rows) {
+        return rows.map(row => ({
+            publisher: String(this._val(row, ['Publisher', 'Name', 'Publisher Name', 'Vendor'])),
+            companySpend: this._numVal(row, ['Company Spend', 'Company', 'Total Spend', 'Org Spend']),
+            msdSpend: this._numVal(row, ['MSD Spend', 'MSD', 'MS Dev']),
+            tiamSpend: this._numVal(row, ['TI&M Spend', 'TIAM Spend', 'TI&M', 'TIAM', 'TI and M']),
+            fiscalYear: String(this._val(row, ['Fiscal Year', 'FY', 'Year'], 'FY26')),
+            notes: String(this._val(row, ['Notes', 'Note', 'Comments'])),
+        })).filter(s => s.publisher);
+    }
+
+    _mapRiskSheet(rows) {
+        return rows.map(row => ({
+            publisher: String(this._val(row, ['Publisher', 'Name', 'Publisher Name', 'Vendor'])),
+            sspa: String(this._val(row, ['SSPA'])),
+            po: String(this._val(row, ['PO', 'Purchase Order'])),
+            finance: String(this._val(row, ['Finance', 'Financial'])),
+            legal: String(this._val(row, ['Legal'])),
+            inventory: String(this._val(row, ['Inventory', 'Inv'])),
+            details: String(this._val(row, ['Details', 'Detail', 'Risk Details'])),
+        })).filter(r => r.publisher);
+    }
+
+    _mapTitlesSheet(rows) {
+        return rows.map(row => ({
+            title: String(this._val(row, ['Title', 'Managed Title', 'Product', 'Software Title'])),
+            publisher: String(this._val(row, ['Publisher', 'Publisher Name', 'Vendor'])),
+            category: String(this._val(row, ['Category', 'Cat'], 'Other')),
+            licenseCount: this._numVal(row, ['License Count', 'Count', 'Qty', 'Quantity', 'Licenses']),
+            notes: String(this._val(row, ['Notes', 'Note', 'Status', 'Comments'], 'active')),
+        })).filter(t => t.title);
+    }
+
+    _mapKpisSheet(rows) {
+        return rows.map(row => ({
+            name: String(this._val(row, ['Name', 'KPI', 'KPI Name', 'Metric'])),
+            value: this._numVal(row, ['Value', 'Val', 'Amount', 'Count']),
+            unit: String(this._val(row, ['Unit', 'UOM'], 'tickets')),
+            source: String(this._val(row, ['Source', 'System', 'Data Source'])),
+            lastUpdated: this._dateVal(row, ['Last Updated', 'Updated', 'Date', 'As Of']),
+            notes: String(this._val(row, ['Notes', 'Note', 'Comments'])),
+        })).filter(k => k.name);
     }
 
     convertToCSV(data) {

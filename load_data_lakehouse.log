@@ -1,590 +1,604 @@
-2026-02-18 17:32:22,823 INFO ============================================================
-2026-02-18 17:32:22,824 INFO SLS MBR DATA LOAD TO LAKEHOUSE
-2026-02-18 17:32:22,824 INFO ============================================================
-2026-02-18 17:32:28,047 INFO Workspace: scm-dev (d3c735d2-8f5c-4d1a-b825-0cc5353a8de2)
-2026-02-18 17:32:28,539 INFO Lakehouse: lakehouse (aa363084-8758-4301-8697-06bff14834cd)
-2026-02-18 17:32:28,540 INFO 
-2026-02-18 17:32:28,541 INFO STEP 1: Upload CSVs to OneLake
-2026-02-18 17:32:28,542 INFO ----------------------------------------
-2026-02-18 17:32:32,839 INFO === Uploading CSVs to OneLake ===
-2026-02-18 17:32:32,840 INFO No environment configuration found.
-2026-02-18 17:32:32,855 INFO ManagedIdentityCredential will use IMDS
-2026-02-18 17:32:32,862 INFO Request URL: 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=REDACTED&resource=REDACTED'
+2026-02-24 13:04:43,182 INFO ============================================================
+2026-02-24 13:04:43,182 INFO SLS MBR DATA LOAD TO LAKEHOUSE
+2026-02-24 13:04:43,182 INFO ============================================================
+2026-02-24 13:04:45,303 INFO Workspace: scm-dev (d3c735d2-8f5c-4d1a-b825-0cc5353a8de2)
+2026-02-24 13:04:45,650 INFO Lakehouse: lakehouse (aa363084-8758-4301-8697-06bff14834cd)
+2026-02-24 13:04:45,650 INFO 
+2026-02-24 13:04:45,650 INFO STEP 0: Export data.js to CSV files
+2026-02-24 13:04:45,650 INFO ----------------------------------------
+2026-02-24 13:04:45,650 INFO === Exporting data.js to CSV files ===
+2026-02-24 13:04:45,655 WARNING Failed to parse spendData: Expecting ',' delimiter: line 7 column 134 (char 818)
+2026-02-24 13:04:45,655 INFO   Manually extracted 19 objects from spendData
+2026-02-24 13:04:45,658 INFO   dim_Publisher.csv: 20 rows
+2026-02-24 13:04:45,658 INFO   dim_Date.csv: 365 rows
+2026-02-24 13:04:45,658 INFO   fact_Spend.csv: 19 rows
+2026-02-24 13:04:45,667 INFO   fact_Risk.csv: 20 rows
+2026-02-24 13:04:45,668 INFO   dim_ManagedTitle.csv: 43 rows
+2026-02-24 13:04:45,669 INFO   fact_ExternalKPI.csv: 2 rows
+2026-02-24 13:04:45,669 INFO 
+2026-02-24 13:04:45,669 INFO STEP 1: Upload CSVs to OneLake
+2026-02-24 13:04:45,669 INFO ----------------------------------------
+2026-02-24 13:04:46,863 INFO === Uploading CSVs to OneLake ===
+2026-02-24 13:04:46,863 INFO No environment configuration found.
+2026-02-24 13:04:46,869 INFO ManagedIdentityCredential will use IMDS
+2026-02-24 13:04:46,872 INFO Request URL: 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=REDACTED&resource=REDACTED'
 Request method: 'GET'
 Request headers:
-    'User-Agent': 'azsdk-python-identity/1.25.2 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-identity/1.25.2 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
 No body was attached to the request
-2026-02-18 17:32:37,604 INFO DefaultAzureCredential acquired a token from AzureCliCredential
-2026-02-18 17:32:37,606 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data?resource=REDACTED'
+2026-02-24 13:04:49,615 INFO DefaultAzureCredential acquired a token from AzureCliCredential
+2026-02-24 13:04:49,615 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'dcc4ccaa-0d32-11f1-8582-c89665f1b224'
+    'x-ms-client-request-id': '732c049e-11c4-11f1-bb9a-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:39,756 INFO Response status: 201
+2026-02-24 13:04:50,323 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:40 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C5CFFD98"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:40 GMT'
+    'ETag': '"0x8DE73E8596B5640"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d2fa-101f-0019-3a3f-a12c69000000'
+    'x-ms-request-id': '8e55374a-001f-0067-62d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'dcc4ccaa-0d32-11f1-8582-c89665f1b224'
+    'x-ms-client-request-id': '732c049e-11c4-11f1-bb9a-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:39,759 INFO Created directory: aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data
-2026-02-18 17:32:39,763 INFO   Uploading dim_Publisher.csv (1,905 bytes)...
-2026-02-18 17:32:39,769 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?resource=REDACTED'
+2026-02-24 13:04:50,325 INFO Created directory: aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data
+2026-02-24 13:04:50,325 INFO   Uploading dim_Publisher.csv (1,944 bytes)...
+2026-02-24 13:04:50,343 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e0e2d94b-0d32-11f1-9f3c-c89665f1b224'
+    'x-ms-client-request-id': '753d9d82-11c4-11f1-a1b6-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:39,863 INFO Response status: 201
+2026-02-24 13:04:50,440 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:40 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C5E239B0"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E8597E8624"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d300-101f-0019-403f-a12c69000000'
+    'x-ms-request-id': '8e55374c-001f-0067-64d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e0e2d94b-0d32-11f1-9f3c-c89665f1b224'
+    'x-ms-client-request-id': '753d9d82-11c4-11f1-a1b6-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:39,872 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:50,443 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'Content-Length': '1905'
+    'Content-Length': '1944'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e0f27853-0d32-11f1-a949-c89665f1b224'
+    'x-ms-client-request-id': '754cdefc-11c4-11f1-873e-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:39,956 INFO Response status: 202
+2026-02-24 13:04:50,540 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:40 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d304-101f-0019-443f-a12c69000000'
+    'x-ms-request-id': '8e55374d-001f-0067-65d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e0f27853-0d32-11f1-a949-c89665f1b224'
+    'x-ms-client-request-id': '754cdefc-11c4-11f1-873e-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:39,961 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:50,540 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Publisher.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C5E239B0"'
+    'If-Match': '"0x8DE73E8597E8624"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1003161-0d32-11f1-8cf1-c89665f1b224'
+    'x-ms-client-request-id': '755bc008-11c4-11f1-a42a-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,062 INFO Response status: 200
+2026-02-24 13:04:50,629 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6007F6C"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E8599B5744"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d30b-101f-0019-4b3f-a12c69000000'
+    'x-ms-request-id': '8e55374e-001f-0067-66d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1003161-0d32-11f1-8cf1-c89665f1b224'
+    'x-ms-client-request-id': '755bc008-11c4-11f1-a42a-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,064 INFO   [OK] dim_Publisher.csv
-2026-02-18 17:32:40,067 INFO   Uploading dim_Date.csv (12,239 bytes)...
-2026-02-18 17:32:40,076 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?resource=REDACTED'
+2026-02-24 13:04:50,631 INFO   [OK] dim_Publisher.csv
+2026-02-24 13:04:50,631 INFO   Uploading dim_Date.csv (12,239 bytes)...
+2026-02-24 13:04:50,647 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e111b103-0d32-11f1-8497-c89665f1b224'
+    'x-ms-client-request-id': '756c14bb-11c4-11f1-a5c2-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,155 INFO Response status: 201
+2026-02-24 13:04:50,721 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C60EA184"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E859A93948"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d30e-101f-0019-4e3f-a12c69000000'
+    'x-ms-request-id': '8e553752-001f-0067-6ad1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e111b103-0d32-11f1-8497-c89665f1b224'
+    'x-ms-client-request-id': '756c14bb-11c4-11f1-a5c2-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,159 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:50,721 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
     'Content-Length': '12239'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e11e76fb-0d32-11f1-84bc-c89665f1b224'
+    'x-ms-client-request-id': '75774e99-11c4-11f1-8295-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:40,247 INFO Response status: 202
+2026-02-24 13:04:50,793 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d311-101f-0019-503f-a12c69000000'
+    'x-ms-request-id': '8e553753-001f-0067-6bd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e11e76fb-0d32-11f1-84bc-c89665f1b224'
+    'x-ms-client-request-id': '75774e99-11c4-11f1-8295-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,252 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:50,793 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_Date.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C60EA184"'
+    'If-Match': '"0x8DE73E859A93948"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e12c6c52-0d32-11f1-9a0a-c89665f1b224'
+    'x-ms-client-request-id': '758258a9-11c4-11f1-9aa0-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,352 INFO Response status: 200
+2026-02-24 13:04:50,885 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C62CB298"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E859C29740"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d316-101f-0019-523f-a12c69000000'
+    'x-ms-request-id': '8e553755-001f-0067-6dd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e12c6c52-0d32-11f1-9a0a-c89665f1b224'
+    'x-ms-client-request-id': '758258a9-11c4-11f1-9aa0-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,355 INFO   [OK] dim_Date.csv
-2026-02-18 17:32:40,358 INFO   Uploading fact_Spend.csv (1,023 bytes)...
-2026-02-18 17:32:40,364 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?resource=REDACTED'
+2026-02-24 13:04:50,886 INFO   [OK] dim_Date.csv
+2026-02-24 13:04:50,886 INFO   Uploading fact_Spend.csv (1,040 bytes)...
+2026-02-24 13:04:50,899 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e13d9f29-0d32-11f1-bc03-c89665f1b224'
+    'x-ms-client-request-id': '75927397-11c4-11f1-8ef9-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,460 INFO Response status: 201
+2026-02-24 13:04:50,974 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C63C77F0"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E859CFCF88"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d31a-101f-0019-563f-a12c69000000'
+    'x-ms-request-id': '8e553757-001f-0067-6fd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e13d9f29-0d32-11f1-bc03-c89665f1b224'
+    'x-ms-client-request-id': '75927397-11c4-11f1-8ef9-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,464 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:50,974 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'Content-Length': '1023'
+    'Content-Length': '1040'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e14ced9a-0d32-11f1-a707-c89665f1b224'
+    'x-ms-client-request-id': '759de997-11c4-11f1-b585-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:40,557 INFO Response status: 202
+2026-02-24 13:04:51,044 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d31e-101f-0019-593f-a12c69000000'
+    'x-ms-request-id': '8e553758-001f-0067-70d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e14ced9a-0d32-11f1-a707-c89665f1b224'
+    'x-ms-client-request-id': '759de997-11c4-11f1-b585-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,570 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:51,044 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Spend.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C63C77F0"'
+    'If-Match': '"0x8DE73E859CFCF88"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e15c7c70-0d32-11f1-b3aa-c89665f1b224'
+    'x-ms-client-request-id': '75a8b4aa-11c4-11f1-9801-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,707 INFO Response status: 200
+2026-02-24 13:04:51,144 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6610FB0"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'ETag': '"0x8DE73E859E9D2B8"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d320-101f-0019-5b3f-a12c69000000'
+    'x-ms-request-id': '8e55375a-001f-0067-72d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e15c7c70-0d32-11f1-b3aa-c89665f1b224'
+    'x-ms-client-request-id': '75a8b4aa-11c4-11f1-9801-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,713 INFO   [OK] fact_Spend.csv
-2026-02-18 17:32:40,723 INFO   Uploading fact_Risk.csv (921 bytes)...
-2026-02-18 17:32:40,733 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?resource=REDACTED'
+2026-02-24 13:04:51,144 INFO   [OK] fact_Spend.csv
+2026-02-24 13:04:51,144 INFO   Uploading fact_Risk.csv (3,078 bytes)...
+2026-02-24 13:04:51,157 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1758bbf-0d32-11f1-a97d-c89665f1b224'
+    'x-ms-client-request-id': '75b9db74-11c4-11f1-b3eb-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:40,835 INFO Response status: 201
+2026-02-24 13:04:51,310 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:50 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6763E58"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A03DD5C"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d323-101f-0019-5e3f-a12c69000000'
+    'x-ms-request-id': '70401f69-a01f-0041-1fd1-a5f436000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1758bbf-0d32-11f1-a97d-c89665f1b224'
+    'x-ms-client-request-id': '75b9db74-11c4-11f1-b3eb-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,838 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:51,310 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'Content-Length': '921'
+    'Content-Length': '3078'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e185f76b-0d32-11f1-8232-c89665f1b224'
+    'x-ms-client-request-id': '75d147f5-11c4-11f1-8f41-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:40,919 INFO Response status: 202
+2026-02-24 13:04:51,408 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:41 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d324-101f-0019-5f3f-a12c69000000'
+    'x-ms-request-id': '8e553764-001f-0067-7bd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e185f76b-0d32-11f1-8232-c89665f1b224'
+    'x-ms-client-request-id': '75d147f5-11c4-11f1-8f41-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:40,922 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:51,409 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_Risk.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C6763E58"'
+    'If-Match': '"0x8DE73E85A03DD5C"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e192d88a-0d32-11f1-941d-c89665f1b224'
+    'x-ms-client-request-id': '75e050d1-11c4-11f1-ac91-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:41,030 INFO Response status: 200
+2026-02-24 13:04:51,498 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C693F418"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A202C8C"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d325-101f-0019-603f-a12c69000000'
+    'x-ms-request-id': '8e553765-001f-0067-7cd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e192d88a-0d32-11f1-941d-c89665f1b224'
+    'x-ms-client-request-id': '75e050d1-11c4-11f1-ac91-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,032 INFO   [OK] fact_Risk.csv
-2026-02-18 17:32:41,036 INFO   Uploading dim_ManagedTitle.csv (1,964 bytes)...
-2026-02-18 17:32:41,045 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?resource=REDACTED'
+2026-02-24 13:04:51,500 INFO   [OK] fact_Risk.csv
+2026-02-24 13:04:51,501 INFO   Uploading dim_ManagedTitle.csv (2,192 bytes)...
+2026-02-24 13:04:51,521 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1a5a9ac-0d32-11f1-8eee-c89665f1b224'
+    'x-ms-client-request-id': '75f16222-11c4-11f1-940b-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:41,120 INFO Response status: 201
+2026-02-24 13:04:51,607 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6A21224"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A2E89E4"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d329-101f-0019-643f-a12c69000000'
+    'x-ms-request-id': '70401f78-a01f-0041-2dd1-a5f436000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1a5a9ac-0d32-11f1-8eee-c89665f1b224'
+    'x-ms-client-request-id': '75f16222-11c4-11f1-940b-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,122 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:51,607 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'Content-Length': '1964'
+    'Content-Length': '2192'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1b175e2-0d32-11f1-b0e5-c89665f1b224'
+    'x-ms-client-request-id': '75fe7d51-11c4-11f1-b8be-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:41,199 INFO Response status: 202
+2026-02-24 13:04:51,682 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d32c-101f-0019-673f-a12c69000000'
+    'x-ms-request-id': '70401f7c-a01f-0041-31d1-a5f436000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1b175e2-0d32-11f1-b0e5-c89665f1b224'
+    'x-ms-client-request-id': '75fe7d51-11c4-11f1-b8be-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,202 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:51,682 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/dim_ManagedTitle.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C6A21224"'
+    'If-Match': '"0x8DE73E85A2E89E4"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1bd8502-0d32-11f1-869a-c89665f1b224'
+    'x-ms-client-request-id': '7609f49e-11c4-11f1-8a2b-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:41,297 INFO Response status: 200
+2026-02-24 13:04:51,781 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6BCD074"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A4B69E0"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d32f-101f-0019-6a3f-a12c69000000'
+    'x-ms-request-id': '70401f81-a01f-0041-36d1-a5f436000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1bd8502-0d32-11f1-869a-c89665f1b224'
+    'x-ms-client-request-id': '7609f49e-11c4-11f1-8a2b-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,300 INFO   [OK] dim_ManagedTitle.csv
-2026-02-18 17:32:41,306 INFO   Uploading fact_ExternalKPI.csv (139 bytes)...
-2026-02-18 17:32:41,314 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?resource=REDACTED'
+2026-02-24 13:04:51,784 INFO   [OK] dim_ManagedTitle.csv
+2026-02-24 13:04:51,785 INFO   Uploading fact_ExternalKPI.csv (139 bytes)...
+2026-02-24 13:04:51,798 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?resource=REDACTED'
 Request method: 'PUT'
 Request headers:
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1ce8e9a-0d32-11f1-ad64-c89665f1b224'
+    'x-ms-client-request-id': '761bc611-11c4-11f1-bf5e-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:41,398 INFO Response status: 201
+2026-02-24 13:04:51,904 INFO Response status: 201
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6CC3A60"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A5DE10C"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d331-101f-0019-6c3f-a12c69000000'
+    'x-ms-request-id': '8e55376a-001f-0067-7fd1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1ce8e9a-0d32-11f1-ad64-c89665f1b224'
+    'x-ms-client-request-id': '761bc611-11c4-11f1-bf5e-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,404 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?action=REDACTED&position=REDACTED'
+2026-02-24 13:04:51,904 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?action=REDACTED&position=REDACTED'
 Request method: 'PATCH'
 Request headers:
     'Content-Length': '139'
     'x-ms-version': 'REDACTED'
     'Content-Type': 'application/json'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1dc5449-0d32-11f1-9f09-c89665f1b224'
+    'x-ms-client-request-id': '762bcf2b-11c4-11f1-979b-381868ec7010'
     'Authorization': 'REDACTED'
 A body is sent with the request
-2026-02-18 17:32:41,490 INFO Response status: 202
+2026-02-24 13:04:51,970 INFO Response status: 202
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d334-101f-0019-6f3f-a12c69000000'
+    'x-ms-request-id': '8e55376e-001f-0067-03d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1dc5449-0d32-11f1-9f09-c89665f1b224'
+    'x-ms-client-request-id': '762bcf2b-11c4-11f1-979b-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,493 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?action=REDACTED&position=REDACTED&close=REDACTED'
+2026-02-24 13:04:51,970 INFO Request URL: 'https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data/fact_ExternalKPI.csv?action=REDACTED&position=REDACTED&close=REDACTED'
 Request method: 'PATCH'
 Request headers:
-    'If-Match': '"0x8DE6F56C6CC3A60"'
+    'If-Match': '"0x8DE73E85A5DE10C"'
     'x-ms-version': 'REDACTED'
     'Accept': 'application/json'
-    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.14.2 (Windows-11-10.0.26200-SP0)'
+    'User-Agent': 'azsdk-python-storage-dfs/12.23.0 Python/3.12.10 (Windows-11-10.0.26200-SP0)'
     'x-ms-date': 'REDACTED'
-    'x-ms-client-request-id': 'e1e9fa97-0d32-11f1-9ea7-c89665f1b224'
+    'x-ms-client-request-id': '7635f827-11c4-11f1-858c-381868ec7010'
     'Authorization': 'REDACTED'
 No body was attached to the request
-2026-02-18 17:32:41,591 INFO Response status: 200
+2026-02-24 13:04:52,065 INFO Response status: 200
 Response headers:
     'Content-Length': '0'
-    'Date': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'Date': 'Tue, 24 Feb 2026 21:04:51 GMT'
     'Server': 'Windows-Azure-HDFS/1.0, Microsoft-HTTPAPI/2.0'
     'Access-Control-Allow-Headers': 'REDACTED'
     'Access-Control-Allow-Methods': 'REDACTED'
     'Access-Control-Allow-Origin': 'REDACTED'
     'Access-Control-Expose-Headers': 'REDACTED'
-    'ETag': '"0x8DE6F56C6E9E7DC"'
-    'Last-Modified': 'Thu, 19 Feb 2026 01:32:42 GMT'
+    'ETag': '"0x8DE73E85A765B00"'
+    'Last-Modified': 'Tue, 24 Feb 2026 21:04:52 GMT'
     'x-ms-request-server-encrypted': 'REDACTED'
-    'x-ms-request-id': 'e971d336-101f-0019-713f-a12c69000000'
+    'x-ms-request-id': '8e553770-001f-0067-05d1-a5bc2e000000'
     'x-ms-version': 'REDACTED'
-    'x-ms-client-request-id': 'e1e9fa97-0d32-11f1-9ea7-c89665f1b224'
+    'x-ms-client-request-id': '7635f827-11c4-11f1-858c-381868ec7010'
     'Strict-Transport-Security': 'REDACTED'
     'X-Content-Type-Options': 'REDACTED'
     'x-ms-root-activity-id': 'REDACTED'
-2026-02-18 17:32:41,593 INFO   [OK] fact_ExternalKPI.csv
-2026-02-18 17:32:41,593 INFO Uploaded 6/6 files to aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data
-2026-02-18 17:32:41,594 INFO 
-2026-02-18 17:32:41,594 INFO STEP 2: Load CSVs into Delta tables
-2026-02-18 17:32:41,594 INFO ----------------------------------------
-2026-02-18 17:32:41,595 INFO === Loading CSVs into Delta tables ===
-2026-02-18 17:32:41,595 INFO   Loading dim_Publisher from dim_Publisher.csv...
-2026-02-18 17:32:58,335 INFO   [OK] dim_Publisher (poll 1)
-2026-02-18 17:32:58,337 INFO   Loading dim_Date from dim_Date.csv...
-2026-02-18 17:33:15,137 INFO   [OK] dim_Date (poll 1)
-2026-02-18 17:33:15,138 INFO   Loading fact_Spend from fact_Spend.csv...
-2026-02-18 17:33:31,854 INFO   [OK] fact_Spend (poll 1)
-2026-02-18 17:33:31,854 INFO   Loading fact_Risk from fact_Risk.csv...
-2026-02-18 17:33:48,362 INFO   [OK] fact_Risk (poll 1)
-2026-02-18 17:33:48,364 INFO   Loading dim_ManagedTitle from dim_ManagedTitle.csv...
-2026-02-18 17:34:04,824 INFO   [OK] dim_ManagedTitle (poll 1)
-2026-02-18 17:34:04,825 INFO   Loading fact_ExternalKPI from fact_ExternalKPI.csv...
-2026-02-18 17:34:21,864 INFO   [OK] fact_ExternalKPI (poll 1)
-2026-02-18 17:34:21,865 INFO Loaded 6/6 tables (0 failed)
-2026-02-18 17:34:21,866 INFO 
-2026-02-18 17:34:21,867 INFO ============================================================
-2026-02-18 17:34:21,868 INFO DATA LOAD COMPLETE
-2026-02-18 17:34:21,869 INFO ============================================================
+2026-02-24 13:04:52,065 INFO   [OK] fact_ExternalKPI.csv
+2026-02-24 13:04:52,065 INFO Uploaded 6/6 files to aa363084-8758-4301-8697-06bff14834cd/Files/sls_mbr_data
+2026-02-24 13:04:52,067 INFO 
+2026-02-24 13:04:52,067 INFO STEP 2: Load CSVs into Delta tables
+2026-02-24 13:04:52,067 INFO ----------------------------------------
+2026-02-24 13:04:52,067 INFO === Loading CSVs into Delta tables ===
+2026-02-24 13:04:52,067 INFO   Loading dim_Publisher from dim_Publisher.csv...
+2026-02-24 13:05:09,134 INFO   dim_Publisher: Running (None%) - poll 1
+2026-02-24 13:05:14,409 INFO   dim_Publisher: Running (None%) - poll 2
+2026-02-24 13:05:19,742 INFO   [OK] dim_Publisher (poll 3)
+2026-02-24 13:05:19,742 INFO   Loading dim_Date from dim_Date.csv...
+2026-02-24 13:05:36,427 INFO   [OK] dim_Date (poll 1)
+2026-02-24 13:05:36,427 INFO   Loading fact_Spend from fact_Spend.csv...
+2026-02-24 13:05:53,067 INFO   [OK] fact_Spend (poll 1)
+2026-02-24 13:05:53,067 INFO   Loading fact_Risk from fact_Risk.csv...
+2026-02-24 13:06:10,152 INFO   [OK] fact_Risk (poll 1)
+2026-02-24 13:06:10,152 INFO   Loading dim_ManagedTitle from dim_ManagedTitle.csv...
+2026-02-24 13:06:26,723 INFO   [OK] dim_ManagedTitle (poll 1)
+2026-02-24 13:06:26,731 INFO   Loading fact_ExternalKPI from fact_ExternalKPI.csv...
+2026-02-24 13:06:43,229 INFO   [OK] fact_ExternalKPI (poll 1)
+2026-02-24 13:06:43,229 INFO Loaded 6/6 tables (0 failed)
+2026-02-24 13:06:43,229 INFO 
+2026-02-24 13:06:43,229 INFO ============================================================
+2026-02-24 13:06:43,229 INFO DATA LOAD COMPLETE
+2026-02-24 13:06:43,229 INFO ============================================================

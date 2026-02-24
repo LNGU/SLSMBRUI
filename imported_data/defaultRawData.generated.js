@@ -18,7 +18,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -29,7 +29,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-06-30",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -40,7 +40,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-10-26",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -51,7 +51,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-06-30",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -84,7 +84,7 @@ const defaultRawData = {
             "type": "On Prem",
             "contact": "Neva",
             "renewalDate": "",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -106,7 +106,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -117,7 +117,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-06-29",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -139,7 +139,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-06-30",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -149,9 +149,9 @@ const defaultRawData = {
             "title": "UU Platform",
             "type": "SaaS",
             "contact": "Kathren / Anahit",
-            "renewalDate": "3031-06-29",
-            "status": "Active",
-            "savingsAmount": 3723771,
+            "renewalDate": "2026-06-29",
+            "status": "In Review",
+            "savingsAmount": 3723770.88,
             "savingsType": "Cost Reduction"
         },
         {
@@ -183,7 +183,7 @@ const defaultRawData = {
             "type": "On Prem",
             "contact": "Neva",
             "renewalDate": "",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -194,7 +194,7 @@ const defaultRawData = {
             "type": "On Prem",
             "contact": "Neva",
             "renewalDate": "",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -205,7 +205,7 @@ const defaultRawData = {
             "type": "SaaS",
             "contact": "Kathren",
             "renewalDate": "2026-08-31",
-            "status": "Active",
+            "status": "In Review",
             "savingsAmount": 0,
             "savingsType": null
         },
@@ -224,8 +224,8 @@ const defaultRawData = {
     "spendData": [
         {
             "publisher": "Adobe",
-            "companySpend": 13644685,
-            "msdSpend": 111765,
+            "companySpend": 13644684.7,
+            "msdSpend": 111765.18,
             "tiamSpend": 26000,
             "fiscalYear": "FY26",
             "notes": ""
@@ -328,7 +328,7 @@ const defaultRawData = {
         },
         {
             "publisher": "ServiceNow",
-            "companySpend": 87113708,
+            "companySpend": 87113707.92,
             "msdSpend": 4954050,
             "tiamSpend": 0,
             "fiscalYear": "FY26",
@@ -336,9 +336,9 @@ const defaultRawData = {
         },
         {
             "publisher": "Staffbase Canada Systems, Inc.",
-            "companySpend": 733804,
-            "msdSpend": 733804,
-            "tiamSpend": 733804,
+            "companySpend": 733803.84,
+            "msdSpend": 733803.84,
+            "tiamSpend": 733803.84,
             "fiscalYear": "FY26",
             "notes": ""
         },
@@ -445,7 +445,7 @@ const defaultRawData = {
             "finance": "Figma Make is moving from beta to production, which will start credit throttling starting to March 18th. Due to the lack of granular controls, conversations with leadership have determined that we will not allow purchasing for additional credits until proper controls are in place. Existing users' (1200 - 2000 users) access to Figma Make will be throttled to prevent overage scenarios.",
             "legal": "",
             "inventory": "",
-            "details": "Figma shows as being in a PO block status for SSPA. You must have a Restricted Use exception in place to create a PO or Figma has to provide the evidence needed to resolve section K of the DPR. Figma has 12 months to comply. Figma and MSFT stakeholders are aware that this will impact renewal term but should not block it because our renewal is within the 12 month period."
+            "details": "Figma shows as being in a PO block status for SSPA. You must have a Restricted Use exception in place to create a PO or Figma has to provide the evidence needed to resolve section K of the DPR.  Figma has 12 months to comply. Figma and MSFT stakeholders are aware that this will impact renewal term but should not block it because our renewal is within the 12 month period."
         },
         {
             "publisher": "JetBrains America Inc.",
@@ -521,7 +521,7 @@ const defaultRawData = {
         },
         {
             "publisher": "Tactivos Inc.",
-            "sspa": "Supplier status is restricted. Supplier Code of Conduct is non-compliant. SSPA Supplier DPR due date = 12/4/2025",
+            "sspa": "Supplier status is restricted. Supplier Code of Conduct is non-compliant.\nSSPA Supplier DPR due date = 12/4/2025",
             "po": "",
             "finance": "",
             "legal": "",
@@ -567,13 +567,6 @@ const defaultRawData = {
     ],
     "managedTitles": [
         {
-            "title": "UU Platform",
-            "publisher": "ServiceNow",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
             "title": "Creative Cloud",
             "publisher": "Adobe",
             "category": "Other",
@@ -581,155 +574,22 @@ const defaultRawData = {
             "notes": "active"
         },
         {
-            "title": "Figma",
-            "publisher": "Figma",
+            "title": "Claude Code",
+            "publisher": "Anthropic",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "StaffBase",
-            "publisher": "Bananatag Systems Inc.",
+            "title": "Articulate 360",
+            "publisher": "Articulate Global LLC",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "Docker",
-            "publisher": "Docker",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "Mural",
-            "publisher": "Tactivos Inc.",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JMP Pro",
-            "publisher": "JMP Statistical Discovery LLC (SAS Institute)",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JMP Standard",
-            "publisher": "JMP Statistical Discovery LLC (SAS Institute)",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains All Products Pack",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains CLion",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains DataGrip",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains dotTracer",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains dotUltimate",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains GoLand",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains IntelliJ IDEA Ultimate",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains PhpStorm",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains PyCharm",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains ReShaper",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains Rider",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains RubyMine",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains TeamCity",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "JetBrains WebStorm",
-            "publisher": "JetBrains",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "Sketchup",
-            "publisher": "Trimble",
-            "category": "Other",
-            "licenseCount": 0,
-            "notes": "active"
-        },
-        {
-            "title": "Catchpoint",
-            "publisher": "Catchpoint Systems Inc.",
+            "title": "Reach 360 Pro",
+            "publisher": "Articulate Global LLC",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
@@ -749,7 +609,7 @@ const defaultRawData = {
             "notes": "active"
         },
         {
-            "title": "MotionBuilder –",
+            "title": "MotionBuilder",
             "publisher": "Autodesk Inc.",
             "category": "Other",
             "licenseCount": 0,
@@ -777,36 +637,141 @@ const defaultRawData = {
             "notes": "active"
         },
         {
-            "title": "Camtasia",
-            "publisher": "TechSmith",
+            "title": "Catchpoint",
+            "publisher": "Catchpoint Systems Inc.",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "SnagIt",
-            "publisher": "TechSmith",
+            "title": "Docker",
+            "publisher": "Docker",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "UserTesting",
-            "publisher": "UserTesting Technologies, Inc.",
+            "title": "Figma",
+            "publisher": "Figma",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "Articulate 360",
-            "publisher": "Articulate Global LLC",
+            "title": "JetBrains All Products Pack",
+            "publisher": "JetBrains America Inc.",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "Reach 360 Pro",
-            "publisher": "Articulate Global LLC",
+            "title": "JetBrains CLion",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains DataGrip",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains dotTracer",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains dotUltimate",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains GoLand",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains IntelliJ IDEA Ultimate",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains PhpStorm",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains PyCharm",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains ReShaper",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains Rider",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains RubyMine",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains TeamCity",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JetBrains WebStorm",
+            "publisher": "JetBrains America Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JMP Standard",
+            "publisher": "JMP Statistical Discovery LLC (SAS Institute)",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "JMP Pro",
+            "publisher": "JMP Statistical Discovery LLC (SAS Institute)",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "ChatGPT Enterprise",
+            "publisher": "Open AI",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
@@ -826,6 +791,13 @@ const defaultRawData = {
             "notes": "active"
         },
         {
+            "title": "Telerik  DevCraft Complete Enterprise",
+            "publisher": "Progress",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
             "title": "SensorTower",
             "publisher": "SensorTower Inc.",
             "category": "Other",
@@ -840,43 +812,78 @@ const defaultRawData = {
             "notes": "active"
         },
         {
-            "title": "Telerik Progress DevCraft Complete Enterprise",
-            "publisher": "Telerik",
+            "title": "UU Platform",
+            "publisher": "ServiceNow",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "Claude Code",
-            "publisher": "Anthropic",
+            "title": "Staffbase",
+            "publisher": "Staffbase Canada Systems, Inc.",
             "category": "Other",
             "licenseCount": 0,
             "notes": "active"
         },
         {
-            "title": "ChatGPT Enterprise",
-            "publisher": "OpenAI",
+            "title": "MURAL",
+            "publisher": "Tactivos Inc.",
             "category": "Other",
             "licenseCount": 0,
-            "notes": ""
+            "notes": "active"
+        },
+        {
+            "title": "Camtasia",
+            "publisher": "TechSmith",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "Snagit",
+            "publisher": "TechSmith",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "Sketchup",
+            "publisher": "Trimble",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "UserTesting",
+            "publisher": "UserTesting Technologies, Inc.",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
+        },
+        {
+            "title": "LINQPad",
+            "publisher": "LINQPad Pty Ltd",
+            "category": "Other",
+            "licenseCount": 0,
+            "notes": "active"
         }
     ],
-    "datasetVersion": "FY26_NEFAYPGRAFF_2026-02-18",
+    "datasetVersion": "FY26_NEFAYPGRAFF_2026-02-24",
     "externalKpis": [
         {
             "name": "SNOW Tickets MTD",
-            "value": 706,
+            "value": 450,
             "unit": "tickets",
             "source": "ServiceNow",
-            "lastUpdated": "2026-01-26",
+            "lastUpdated": "2026-02-24",
             "notes": ""
         },
         {
             "name": "ICM Tickets MTD",
-            "value": 130,
+            "value": 450,
             "unit": "tickets",
             "source": "ICM System",
-            "lastUpdated": "2026-01-26",
+            "lastUpdated": "2026-02-24",
             "notes": ""
         }
     ]

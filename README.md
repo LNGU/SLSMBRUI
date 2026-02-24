@@ -410,23 +410,98 @@ pip install azure-storage-file-datalake azure-identity deltalake pandas
 
 | Script | Purpose |
 |--------|---------|
+| `import_from_csv.py` | Import publisher/spend/risk data from CSV into data.js |
+| `sync_external_kpis_from_semantic_model.py` | Sync SNOW/ICM KPIs from Power BI semantic model |
+| `sync_kpis_from_fabric_lakehouse.py` | Sync KPIs from Fabric Lakehouse Delta tables |
 | `deploy_report_to_fabric.py` | Deploy TMDL semantic model + PBIR report via Git integration |
 | `load_data_to_lakehouse.py` | Export data.js to CSV, upload to OneLake, load Delta tables |
 | `deploy_monthly.py` | Orchestrate monthly deployment pipeline |
 
-### Quick Start
+### Monthly Refresh Runbook
+
+Follow these steps each month to refresh the dashboard with the latest data and deploy to Fabric.
+
+#### Prerequisites (one-time setup)
 
 ```bash
-# Full deployment (data + report)
-python deploy_monthly.py --workspace scm-dev
+# Create and activate virtual environment
+python -m venv .venv
+.venv\Scripts\activate
 
-# Or run individual steps:
-# 1. Load data to Lakehouse (6 Delta tables)
+# Install dependencies
+pip install openpyxl azure-storage-file-datalake azure-identity deltalake pyarrow
+
+# Log in to Azure CLI
+az login
+```
+
+#### Step-by-Step Monthly Refresh
+
+```bash
+# Activate the virtual environment
+.venv\Scripts\activate
+
+# 1. Get the latest CSV from the data source (OneDrive link or manual export)
+#    Place it in the project root, e.g. "FY26 SLS Dashboard NEFAY_PGRAFF.csv"
+
+# 2. Import CSV data into data.js
+python import_from_csv.py --file "FY26 SLS Dashboard NEFAY_PGRAFF.csv" --data-js data.js
+
+# 3. Sync external KPIs from the Fabric semantic model (SNOW/ICM tickets)
+python sync_external_kpis_from_semantic_model.py \
+    --workspace-id d3c735d2-8f5c-4d1a-b825-0cc5353a8de2 \
+    --dataset-name "SLS MBR" \
+    --data-file data.js
+
+# 4. Sync KPIs from Fabric Lakehouse Delta tables (latest ticket counts)
+python sync_kpis_from_fabric_lakehouse.py \
+    --snow-url "https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Tables/fact_ExternalKPI" \
+    --icm-url "https://msit-onelake.dfs.fabric.microsoft.com/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/aa363084-8758-4301-8697-06bff14834cd/Tables/fact_ExternalKPI" \
+    --snow-column value --icm-column value \
+    --data-js data.js
+
+# 5. Load updated data to Fabric Lakehouse (exports CSVs, uploads to OneLake, loads Delta tables)
 python load_data_to_lakehouse.py --workspace scm-dev
 
-# 2. Deploy semantic model + report to Git
+# 6. Deploy semantic model + report to Fabric via Git integration
 python deploy_report_to_fabric.py --workspace scm-dev
+
+# 7. Generate the imported data snapshot for version tracking
+node -e "const fs=require('fs'); const c=fs.readFileSync('data.js','utf-8'); const m=c.match(/const\s+defaultRawData\s*=\s*(\{[\s\S]*?\n\});/); if(m){eval('var r='+m[1]); fs.writeFileSync('imported_data/defaultRawData.generated.js','const defaultRawData = '+JSON.stringify(r,null,4)+';','utf-8');}"
+
+# 8. Commit and push
+git add -A
+git commit -m "Monthly data refresh - $(date +%Y-%m-%d)"
+git push
 ```
+
+#### Quick Deploy (all-in-one)
+
+```bash
+# Runs steps 5 + 6 together (data load + report deploy + refresh)
+python deploy_monthly.py --workspace scm-dev
+
+# Data only (skip report redeploy)
+python deploy_monthly.py --workspace scm-dev --data-only
+
+# Report only (skip data reload)
+python deploy_monthly.py --workspace scm-dev --report-only
+
+# Dry run (preview without changes)
+python deploy_monthly.py --workspace scm-dev --dry-run
+```
+
+#### Verify the Deployment
+
+1. Open the **Power BI report** in the Fabric portal:
+   `https://msit.powerbi.com/groups/d3c735d2-8f5c-4d1a-b825-0cc5353a8de2/reports/a0c27020-623f-4d07-b271-1df1a17bd26a`
+2. Confirm KPI values update (Company Spend, SNOW/ICM tickets, managed titles count)
+3. Check `data.js` → `datasetVersion` matches today's date (e.g. `FY26_NEFAYPGRAFF_2026-02-24`)
+4. Run the local dashboard for a quick visual sanity check:
+   ```bash
+   python -m http.server 8080
+   # Open http://localhost:8080
+   ```
 
 ### Workspace Configuration
 
@@ -471,4 +546,4 @@ Internal Microsoft Tool - Software License Services Team
 
 ---
 
-*Last Updated: January 2026*
+*Last Updated: February 2026*
